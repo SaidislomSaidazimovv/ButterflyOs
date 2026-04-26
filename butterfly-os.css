@@ -126,12 +126,28 @@ nav {
   color: var(--ink);
 }
 .nav-links a {
-  transition: color 0.2s ease;
+  position: relative;
+  transition: color 0.25s ease, opacity 0.25s ease;
   opacity: 0.85;
+  padding: 4px 0;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--teal-2);
+  transition: width 0.3s ease, left 0.3s ease;
 }
 .nav-links a:hover {
   color: var(--teal-2);
   opacity: 1;
+}
+.nav-links a:hover::after {
+  width: 100%;
+  left: 0;
 }
 @media (max-width: 740px) {
   .nav-links {
@@ -294,6 +310,15 @@ nav {
 .btn-ghost:hover {
   border-color: rgba(255, 255, 255, 0.6);
   background: rgba(255, 255, 255, 0.04);
+}
+.btn-arrow {
+  display: inline-block;
+  margin-left: 2px;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.btn:hover .btn-arrow {
+  transform: translateX(6px);
 }
 .btn.dark-primary {
   background: var(--ink);
