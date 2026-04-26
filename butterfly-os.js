@@ -83,8 +83,6 @@
     document.getElementById('detHeavy').textContent = data.heavy;
     seasonButtons.forEach(b => b.classList.remove('is-active'));
     card.classList.add('is-active');
-    detailPanel.classList.remove('open');
-    void detailPanel.offsetWidth;
     detailPanel.classList.add('open');
     activeSeason = id;
   }

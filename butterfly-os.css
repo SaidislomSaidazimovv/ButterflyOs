@@ -890,18 +890,28 @@ section.dark .head .lede {
 .season-detail {
   max-width: 880px;
   margin: 0 auto;
-  padding: 56px 48px;
+  padding: 0 48px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
   text-align: left;
-  display: none;
   border-left: 4px solid var(--teal);
   backdrop-filter: blur(12px);
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  overflow: hidden;
+  transition:
+    max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s ease,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .season-detail.open {
-  display: block;
-  animation: fadeIn 0.4s ease;
+  max-height: 1500px;
+  opacity: 1;
+  transform: translateY(0);
+  padding: 56px 48px;
 }
 .season-detail .det-eyebrow {
   font-size: 11px;
