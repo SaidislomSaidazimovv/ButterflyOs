@@ -533,6 +533,33 @@ section.dark .head .lede {
   max-width: 1080px;
   margin: 0 auto;
 }
+.architecture-stack {
+  max-width: 1080px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+}
+.architecture-stack .layer-card {
+  border-radius: 0;
+  min-height: auto;
+}
+.architecture-stack .layer-card.cultural::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal) 0%, var(--blue) 100%);
+  z-index: 2;
+}
+.architecture-stack .layer-card.institutional {
+  box-shadow: inset 0 28px 60px -28px rgba(29, 233, 197, 0.22);
+}
 .layer-card {
   border-radius: 24px;
   overflow: hidden;
