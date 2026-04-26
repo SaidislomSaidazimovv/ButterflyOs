@@ -271,6 +271,17 @@ nav {
   width: clamp(120px, 14vw, 180px);
   margin: 0 auto 48px;
   filter: drop-shadow(0 0 60px rgba(29, 233, 197, 0.35));
+  animation: heroHaloBreathe 5.5s ease-in-out infinite;
+}
+@keyframes heroHaloBreathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 60px rgba(29, 233, 197, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 110px rgba(29, 233, 197, 0.55))
+      drop-shadow(0 0 30px rgba(91, 169, 255, 0.25));
+  }
 }
 
 .hero h1 {
@@ -847,10 +858,70 @@ section.dark .head .lede {
   padding: 160px 24px;
   text-align: center;
 }
-.symbol-stage {
+.symbol-halo {
+  position: relative;
   margin: 0 auto 96px;
   width: clamp(180px, 24vw, 300px);
-  filter: drop-shadow(0 0 80px rgba(29, 233, 197, 0.4));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+.symbol-halo::before,
+.symbol-halo::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+  mix-blend-mode: screen;
+}
+.symbol-halo::before {
+  inset: -25%;
+  background: radial-gradient(
+    circle at 30% 40%,
+    rgba(29, 233, 197, 0.55),
+    transparent 60%
+  );
+  animation: symbolHaloDriftA 9s ease-in-out infinite;
+}
+.symbol-halo::after {
+  inset: -25%;
+  background: radial-gradient(
+    circle at 70% 60%,
+    rgba(91, 169, 255, 0.45),
+    transparent 60%
+  );
+  animation: symbolHaloDriftB 11s ease-in-out infinite;
+}
+@keyframes symbolHaloDriftA {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(8%, -6%) scale(1.15);
+    opacity: 1;
+  }
+}
+@keyframes symbolHaloDriftB {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-7%, 7%) scale(1.18);
+    opacity: 1;
+  }
+}
+.symbol-stage {
+  width: 100%;
+  filter: drop-shadow(0 0 40px rgba(29, 233, 197, 0.3));
+  position: relative;
+  z-index: 1;
 }
 .symbol-meanings {
   display: grid;
@@ -1903,6 +1974,25 @@ section.dark .head .lede {
   margin: 0 0 64px calc(-50vw + 50%);
   position: relative;
   z-index: 2;
+  animation: closingHaloBreathe 9.5s ease-in-out infinite;
+}
+@keyframes closingHaloBreathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 80px rgba(29, 233, 197, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 130px rgba(29, 233, 197, 0.7))
+      drop-shadow(0 0 40px rgba(91, 169, 255, 0.3));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .butterfly-mark,
+  .closing-mark,
+  .symbol-halo::before,
+  .symbol-halo::after {
+    animation: none;
+  }
 }
 .closing h2 {
   font-size: clamp(36px, 5.4vw, 72px);
