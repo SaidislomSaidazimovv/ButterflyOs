@@ -397,6 +397,7 @@ section.soft {
   margin-bottom: 24px;
 }
 .head h2 {
+  text-wrap: balance;
   font-size: clamp(40px, 5.4vw, 72px);
   font-weight: 600;
   letter-spacing: -0.035em;
@@ -546,6 +547,218 @@ section.dark .head .lede {
 .architecture-stack .layer-card {
   border-radius: 0;
   min-height: auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.architecture-stack .layer-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 100%;
+}
+.architecture-stack .layer-card-text > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.architecture-stack .layer-card-viz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.architecture-stack .layer-card-viz svg {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+}
+@media (max-width: 740px) {
+  .architecture-stack .layer-card {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .architecture-stack .layer-card-viz {
+    order: 2;
+  }
+  .architecture-stack .layer-card-viz svg {
+    max-width: 220px;
+  }
+}
+
+/* ─── ARCHITECTURE VISUALIZATIONS — entrance + continuous ─── */
+
+/* Cultural — initial states */
+.viz-cultural {
+  overflow: visible;
+}
+.viz-cultural .cult-lines line {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+}
+.viz-cultural .cult-ring {
+  opacity: 0;
+  transform: scale(0.4);
+  transform-origin: 140px 140px;
+}
+.viz-cultural .cult-node-corner,
+.viz-cultural .cult-nodes > circle,
+.viz-cultural .cult-center {
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: center;
+  transform-box: fill-box;
+  transition: fill 0.2s ease, filter 0.2s ease;
+}
+.viz-cultural .cult-point {
+  cursor: pointer;
+}
+.viz-cultural .cult-pill {
+  opacity: 0;
+  transform: scale(0.85);
+  transform-origin: center;
+  transform-box: fill-box;
+  transition: opacity 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.viz-cultural .cult-pill rect {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.18));
+}
+.viz-cultural .cult-point:hover .cult-pill {
+  opacity: 1;
+  transform: scale(1);
+}
+.viz-cultural .cult-point:hover .cult-node-corner {
+  fill: white;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+}
+
+/* Cultural — entrance + continuous (triggered by .in on parent) */
+.architecture-stack.in .viz-cultural .cult-lines line {
+  animation: cultLineDraw 1.4s 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.architecture-stack.in .viz-cultural .cult-center {
+  animation:
+    cultPop 0.7s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+    cultCenterPulse 2.8s 2.5s ease-in-out infinite;
+  will-change: transform, filter;
+}
+.architecture-stack.in .viz-cultural .cult-node-corner {
+  animation: cultPop 0.6s 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.architecture-stack.in .viz-cultural .cult-nodes > circle {
+  animation: cultPop 0.6s 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.architecture-stack.in .viz-cultural .cult-ring-1 {
+  animation:
+    cultRingAppear 1s 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    cultRingPulse 5s 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.architecture-stack.in .viz-cultural .cult-ring-2 {
+  animation:
+    cultRingAppear 1s 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    cultRingPulse 5s 3.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes cultLineDraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes cultPop {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes cultRingAppear {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes cultRingPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(1.18); }
+}
+@keyframes cultCenterPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8)); }
+  50% { transform: scale(1.18); filter: drop-shadow(0 0 14px rgba(255, 255, 255, 1)); }
+}
+
+/* Institutional — initial states */
+.viz-institutional .rail-track,
+.viz-institutional .rail-label,
+.viz-institutional .rail-routing,
+.viz-institutional .rail-routing-label {
+  opacity: 0;
+}
+.viz-institutional .rail-fill {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transform-box: fill-box;
+}
+
+/* Institutional — entrance + continuous */
+.architecture-stack.in .viz-institutional .rail-track-1 { animation: instFade 0.5s 0.4s ease forwards; }
+.architecture-stack.in .viz-institutional .rail-track-2 { animation: instFade 0.5s 0.55s ease forwards; }
+.architecture-stack.in .viz-institutional .rail-track-3 { animation: instFade 0.5s 0.7s ease forwards; }
+.architecture-stack.in .viz-institutional .rail-fill-1 {
+  animation: instFill1 1s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.architecture-stack.in .viz-institutional .rail-fill-2 {
+  animation: instFill2 1s 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.architecture-stack.in .viz-institutional .rail-fill-3 {
+  animation: instFill3 1s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.architecture-stack.in .viz-institutional .rail-label-1 { animation: instFade 0.5s 1.25s ease forwards; }
+.architecture-stack.in .viz-institutional .rail-label-2 { animation: instFade 0.5s 1.4s ease forwards; }
+.architecture-stack.in .viz-institutional .rail-label-3 { animation: instFade 0.5s 1.55s ease forwards; }
+.architecture-stack.in .viz-institutional .rail-routing {
+  animation:
+    instRoutingFade 0.6s 1.6s ease forwards,
+    railRoutingFlow 1.2s 2.3s linear infinite;
+  will-change: stroke-dashoffset;
+}
+.architecture-stack.in .viz-institutional .rail-routing-label { animation: instFade 0.5s 1.85s ease forwards; }
+
+@keyframes instFade {
+  to { opacity: 1; }
+}
+@keyframes instRoutingFade {
+  to { opacity: 1; }
+}
+@keyframes instFill1 {
+  to { opacity: 0.9; transform: scaleX(1); }
+}
+@keyframes instFill2 {
+  to { opacity: 0.72; transform: scaleX(1); }
+}
+@keyframes instFill3 {
+  to { opacity: 0.55; transform: scaleX(1); }
+}
+@keyframes railRoutingFlow {
+  to { stroke-dashoffset: -18; }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .viz-cultural .cult-lines line,
+  .viz-cultural .cult-ring,
+  .viz-cultural .cult-nodes circle,
+  .viz-cultural .cult-center,
+  .viz-institutional .rail-track,
+  .viz-institutional .rail-fill,
+  .viz-institutional .rail-label,
+  .viz-institutional .rail-routing,
+  .viz-institutional .rail-routing-label {
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+    animation: none !important;
+  }
+  .viz-institutional .rail-fill-1 { opacity: 0.9; }
+  .viz-institutional .rail-fill-2 { opacity: 0.72; }
+  .viz-institutional .rail-fill-3 { opacity: 0.55; }
 }
 .architecture-stack .layer-card.cultural::after {
   content: "";
@@ -1768,11 +1981,238 @@ footer {
   background: var(--black);
 }
 .help-button .dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--teal);
   box-shadow: 0 0 8px var(--teal);
+  animation: helpDotGlow 2.4s ease-in-out infinite;
+}
+.help-button .dot::before,
+.help-button .dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--teal);
+  pointer-events: none;
+  animation: helpDotPing 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+.help-button .dot::after {
+  animation-delay: 1.2s;
+}
+@keyframes helpDotGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 6px var(--teal),
+      0 0 12px rgba(29, 233, 197, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 12px var(--teal),
+      0 0 22px rgba(29, 233, 197, 0.55);
+  }
+}
+@keyframes helpDotPing {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .help-button .dot,
+  .help-button .dot::before,
+  .help-button .dot::after {
+    animation: none;
+  }
+}
+
+/* ─── HELP MODAL ─────────────────────────────────────── */
+.help-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.help-modal[hidden] {
+  display: none;
+}
+.help-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.help-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 12, 0.6);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+.help-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: linear-gradient(180deg, #1d1d1f 0%, #0a0a0a 100%);
+  color: var(--paper);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px 32px 28px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  transform: translateY(20px) scale(0.98);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
+}
+.help-modal.open .help-modal-panel {
+  transform: translateY(0) scale(1);
+}
+.help-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.help-modal-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--paper);
+}
+.help-modal-close:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+.help-modal-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+.help-modal h2 {
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  color: var(--paper);
+}
+.help-modal-lede {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 28px;
+}
+.help-region {
+  margin-bottom: 22px;
+}
+.help-region-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.help-line {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  margin-bottom: 6px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+  color: var(--paper);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.help-line:hover {
+  background: rgba(29, 233, 197, 0.08);
+  border-color: rgba(29, 233, 197, 0.3);
+  transform: translateY(-1px);
+}
+.help-line:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+.help-line-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--paper);
+}
+.help-line-action {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.help-modal-emergency {
+  margin-top: 28px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--teal);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+}
+.help-modal-emergency strong {
+  font-weight: 600;
+  color: var(--paper);
+}
+.help-modal-emergency a {
+  color: var(--teal);
+  font-weight: 500;
+}
+.help-modal-emergency a:hover {
+  text-decoration: underline;
+}
+.help-modal-disclaimer {
+  margin-top: 20px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.5;
+}
+@media (max-width: 540px) {
+  .help-modal-panel {
+    padding: 32px 22px 22px;
+    border-radius: 20px;
+  }
+  .help-modal h2 {
+    font-size: 20px;
+  }
 }
 
 /* ─── REVEAL ─────────────────────────────────────────── */

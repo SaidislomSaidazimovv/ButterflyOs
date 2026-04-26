@@ -103,3 +103,60 @@
       }
     });
   });
+
+  // ─── HELP MODAL ───
+  const helpModal = document.getElementById('helpModal');
+  const helpOpenBtn = document.querySelector('[data-help-open]');
+  const helpCloseTargets = helpModal ? helpModal.querySelectorAll('[data-help-close]') : [];
+  let helpLastFocused = null;
+
+  function openHelpModal() {
+    if (!helpModal) return;
+    helpLastFocused = document.activeElement;
+    helpModal.hidden = false;
+    requestAnimationFrame(() => helpModal.classList.add('open'));
+    document.body.style.overflow = 'hidden';
+    const closeBtn = helpModal.querySelector('.help-modal-close');
+    if (closeBtn) closeBtn.focus();
+    document.addEventListener('keydown', handleHelpKeydown);
+  }
+
+  function closeHelpModal() {
+    if (!helpModal) return;
+    helpModal.classList.remove('open');
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', handleHelpKeydown);
+    setTimeout(() => {
+      helpModal.hidden = true;
+      if (helpLastFocused && typeof helpLastFocused.focus === 'function') {
+        helpLastFocused.focus();
+      }
+    }, 350);
+  }
+
+  function handleHelpKeydown(e) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeHelpModal();
+      return;
+    }
+    if (e.key === 'Tab') {
+      // Simple focus trap — keep tabbing inside the modal
+      const focusables = helpModal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  if (helpOpenBtn) helpOpenBtn.addEventListener('click', openHelpModal);
+  helpCloseTargets.forEach(el => el.addEventListener('click', closeHelpModal));
