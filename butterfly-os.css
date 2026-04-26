@@ -821,9 +821,14 @@ section.dark .head .lede {
   background: #2d7dd2;
 }
 .season-btn:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
   transform: translateY(-3px);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    0 12px 40px rgba(29, 233, 197, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 .season-btn:hover::before {
   opacity: 1;
