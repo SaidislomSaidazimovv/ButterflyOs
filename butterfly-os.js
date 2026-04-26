@@ -59,24 +59,49 @@
   };
 
   const detailPanel = document.getElementById('seasonDetail');
-  document.querySelectorAll('.season-btn').forEach(card => {
+  const seasonButtons = document.querySelectorAll('.season-btn');
+  let activeSeason = null;
+
+  function closeSeasonDetail() {
+    detailPanel.classList.remove('open');
+    seasonButtons.forEach(b => b.classList.remove('is-active'));
+    activeSeason = null;
+  }
+
+  function showSeasonDetail(card, id) {
+    const data = seasons[id];
+    // Colors tuned for dark-section detail panel
+    const colors = ['#1de9c5', '#5eead4', '#67e8f9', '#5ba9ff', '#2d7dd2'];
+    detailPanel.style.borderLeftColor = colors[id - 1];
+    document.getElementById('detEyebrow').textContent = data.eyebrow;
+    document.getElementById('detEyebrow').style.color = colors[id - 1];
+    document.getElementById('detTitle').textContent = data.title;
+    document.getElementById('detSub').textContent = data.sub;
+    document.getElementById('detBody').textContent = data.body;
+    document.getElementById('detHelp').textContent = data.help;
+    document.getElementById('detSay').textContent = data.say;
+    document.getElementById('detHeavy').textContent = data.heavy;
+    seasonButtons.forEach(b => b.classList.remove('is-active'));
+    card.classList.add('is-active');
+    detailPanel.classList.remove('open');
+    void detailPanel.offsetWidth;
+    detailPanel.classList.add('open');
+    activeSeason = id;
+  }
+
+  seasonButtons.forEach(card => {
     card.addEventListener('click', () => {
       const id = card.getAttribute('data-season');
-      const data = seasons[id];
-      // Colors tuned for dark-section detail panel
-      const colors = ['#1de9c5', '#5eead4', '#67e8f9', '#5ba9ff', '#2d7dd2'];
-      detailPanel.style.borderLeftColor = colors[id - 1];
-      document.getElementById('detEyebrow').textContent = data.eyebrow;
-      document.getElementById('detEyebrow').style.color = colors[id - 1];
-      document.getElementById('detTitle').textContent = data.title;
-      document.getElementById('detSub').textContent = data.sub;
-      document.getElementById('detBody').textContent = data.body;
-      document.getElementById('detHelp').textContent = data.help;
-      document.getElementById('detSay').textContent = data.say;
-      document.getElementById('detHeavy').textContent = data.heavy;
-      detailPanel.classList.remove('open');
-      void detailPanel.offsetWidth;
-      detailPanel.classList.add('open');
-      detailPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (id === activeSeason) {
+        // Same card clicked — toggle closed
+        closeSeasonDetail();
+      } else if (activeSeason) {
+        // Different card while one is open — switch content in place, no scroll
+        showSeasonDetail(card, id);
+      } else {
+        // First open — scroll into view
+        showSeasonDetail(card, id);
+        detailPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     });
   });
