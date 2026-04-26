@@ -271,17 +271,6 @@ nav {
   width: clamp(120px, 14vw, 180px);
   margin: 0 auto 48px;
   filter: drop-shadow(0 0 60px rgba(29, 233, 197, 0.35));
-  animation: heroHaloBreathe 5.5s ease-in-out infinite;
-}
-@keyframes heroHaloBreathe {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 60px rgba(29, 233, 197, 0.35));
-  }
-  50% {
-    filter: drop-shadow(0 0 110px rgba(29, 233, 197, 0.55))
-      drop-shadow(0 0 30px rgba(91, 169, 255, 0.25));
-  }
 }
 
 .hero h1 {
@@ -858,70 +847,10 @@ section.dark .head .lede {
   padding: 160px 24px;
   text-align: center;
 }
-.symbol-halo {
-  position: relative;
+.symbol-stage {
   margin: 0 auto 96px;
   width: clamp(180px, 24vw, 300px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  isolation: isolate;
-}
-.symbol-halo::before,
-.symbol-halo::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  pointer-events: none;
-  z-index: -1;
-  mix-blend-mode: screen;
-}
-.symbol-halo::before {
-  inset: -25%;
-  background: radial-gradient(
-    circle at 30% 40%,
-    rgba(29, 233, 197, 0.55),
-    transparent 60%
-  );
-  animation: symbolHaloDriftA 9s ease-in-out infinite;
-}
-.symbol-halo::after {
-  inset: -25%;
-  background: radial-gradient(
-    circle at 70% 60%,
-    rgba(91, 169, 255, 0.45),
-    transparent 60%
-  );
-  animation: symbolHaloDriftB 11s ease-in-out infinite;
-}
-@keyframes symbolHaloDriftA {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: translate(8%, -6%) scale(1.15);
-    opacity: 1;
-  }
-}
-@keyframes symbolHaloDriftB {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: translate(-7%, 7%) scale(1.18);
-    opacity: 1;
-  }
-}
-.symbol-stage {
-  width: 100%;
-  filter: drop-shadow(0 0 40px rgba(29, 233, 197, 0.3));
-  position: relative;
-  z-index: 1;
+  filter: drop-shadow(0 0 80px rgba(29, 233, 197, 0.4));
 }
 .symbol-meanings {
   display: grid;
@@ -1974,24 +1903,155 @@ section.dark .head .lede {
   margin: 0 0 64px calc(-50vw + 50%);
   position: relative;
   z-index: 2;
-  animation: closingHaloBreathe 9.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 80px rgba(29, 233, 197, 0.5));
 }
-@keyframes closingHaloBreathe {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 80px rgba(29, 233, 197, 0.5));
+
+/* ─── BLOB FIELD — drifting elongated blurred shapes ─── */
+.blob-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  will-change: transform;
+  opacity: 0.55;
+}
+.blob-teal {
+  background: radial-gradient(
+    ellipse 60% 100% at center,
+    rgba(29, 233, 197, 1),
+    rgba(29, 233, 197, 0.6) 40%,
+    transparent 75%
+  );
+}
+.blob-blue {
+  background: radial-gradient(
+    ellipse 60% 100% at center,
+    rgba(91, 169, 255, 1),
+    rgba(91, 169, 255, 0.5) 40%,
+    transparent 75%
+  );
+}
+.blob-indigo {
+  background: radial-gradient(
+    ellipse 60% 100% at center,
+    rgba(94, 92, 230, 0.95),
+    rgba(94, 92, 230, 0.45) 40%,
+    transparent 75%
+  );
+}
+
+/* Per-section blob shape, size, position, animation timings */
+.hero .blob-a,
+.symbol-section .blob-a,
+.seasons-section .blob-a,
+.closing .blob-a {
+  width: 55vw;
+  height: 22vh;
+  top: 12%;
+  left: -25%;
+  border-radius: 50% / 50%;
+  animation: blobDriftA 32s ease-in-out infinite alternate;
+}
+.hero .blob-b,
+.symbol-section .blob-b,
+.seasons-section .blob-b,
+.closing .blob-b {
+  width: 45vw;
+  height: 26vh;
+  top: 55%;
+  left: 80%;
+  border-radius: 50% / 50%;
+  animation: blobDriftB 38s ease-in-out infinite alternate;
+}
+.hero .blob-c,
+.symbol-section .blob-c,
+.seasons-section .blob-c,
+.closing .blob-c {
+  width: 38vw;
+  height: 18vh;
+  top: 75%;
+  left: 25%;
+  border-radius: 50% / 50%;
+  animation: blobDriftC 28s ease-in-out infinite alternate;
+}
+
+/* Per-section staggered animation-delay so they don't all sync */
+.symbol-section .blob-a {
+  animation-delay: -10s;
+}
+.symbol-section .blob-b {
+  animation-delay: -18s;
+}
+.symbol-section .blob-c {
+  animation-delay: -6s;
+}
+.seasons-section .blob-a {
+  animation-delay: -22s;
+}
+.seasons-section .blob-b {
+  animation-delay: -8s;
+}
+.seasons-section .blob-c {
+  animation-delay: -14s;
+}
+.closing .blob-a {
+  animation-delay: -16s;
+}
+.closing .blob-b {
+  animation-delay: -28s;
+}
+.closing .blob-c {
+  animation-delay: -4s;
+}
+
+@keyframes blobDriftA {
+  from {
+    transform: translate(0, 0) scale(1);
   }
-  50% {
-    filter: drop-shadow(0 0 130px rgba(29, 233, 197, 0.7))
-      drop-shadow(0 0 40px rgba(91, 169, 255, 0.3));
+  to {
+    transform: translate(110vw, -8vh) scale(1.2);
   }
 }
+@keyframes blobDriftB {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-110vw, 6vh) scale(1.15);
+  }
+}
+@keyframes blobDriftC {
+  from {
+    transform: translate(0, 0) scale(0.95);
+  }
+  to {
+    transform: translate(80vw, -16vh) scale(1.25);
+  }
+}
+
+/* Make sure the section content sits ABOVE the blob-field */
+.symbol-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.symbol-section > .head,
+.symbol-section > .symbol-stage,
+.symbol-section > .symbol-meanings {
+  position: relative;
+  z-index: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .butterfly-mark,
-  .closing-mark,
-  .symbol-halo::before,
-  .symbol-halo::after {
-    animation: none;
+  .blob {
+    animation: none !important;
   }
 }
 .closing h2 {
