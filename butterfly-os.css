@@ -590,47 +590,23 @@ section.dark .head .lede {
 
 /* ─── ARCHITECTURE VISUALIZATIONS — entrance + continuous ─── */
 
-/* Cultural — single butterfly with gently flapping wings */
-.viz-cultural {
-  overflow: visible;
-}
-.viz-cultural .cult-butterfly {
+/* Cultural — looping butterfly video with black background dissolved into the card */
+.viz-cultural-video {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  pointer-events: none;
+  /* Black pixels in the video become transparent against the teal-blue
+     gradient backdrop; coloured pixels brighten the gradient.  */
+  mix-blend-mode: screen;
+  background: transparent;
   opacity: 0;
+  transition: opacity 0.6s ease;
 }
-.architecture-stack.in .viz-cultural .cult-butterfly {
-  animation: cultButterflyAppear 1s 0.3s ease forwards;
-}
-.viz-cultural .cult-wing {
-  transform-box: fill-box;
-  will-change: transform;
-}
-.viz-cultural .cult-wing-left {
-  transform-origin: right center;
-}
-.viz-cultural .cult-wing-right {
-  transform-origin: left center;
-}
-.architecture-stack.in .viz-cultural .cult-wing {
-  animation: cultButterflyFlap 2.6s 1.2s ease-in-out infinite;
-}
-.viz-cultural .cult-body,
-.viz-cultural .cult-head {
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
-}
-
-@keyframes cultButterflyAppear {
-  to {
-    opacity: 1;
-  }
-}
-@keyframes cultButterflyFlap {
-  0%,
-  100% {
-    transform: scaleX(1);
-  }
-  50% {
-    transform: scaleX(0.72);
-  }
+.architecture-stack.in .viz-cultural-video {
+  opacity: 1;
 }
 
 /* Institutional — initial states */
