@@ -1328,6 +1328,48 @@ section.dark .head .lede {
   white-space: nowrap;
 }
 
+/* ─── GLOBAL FLAGS — paper-warm visual statement ───────── */
+.global-flags-section {
+  padding: 130px 24px 160px;
+  background: var(--paper-warm);
+  text-align: center;
+}
+.global-flags-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  color: var(--teal-2);
+  margin-bottom: 24px;
+}
+.global-flags-heading {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin: 0 auto 64px;
+  max-width: 880px;
+  color: var(--ink);
+}
+.global-flags-heading .accent {
+  background: linear-gradient(135deg, var(--teal-2) 0%, var(--blue) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.global-flags-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.12);
+}
+.global-flags-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ─── NETWORKS — PARTNER ADOPTION LAYER ───────────────── */
 .networks-section {
   padding: 160px 24px;
