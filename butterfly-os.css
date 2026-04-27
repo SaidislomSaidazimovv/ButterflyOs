@@ -1398,7 +1398,6 @@ section.dark .head .lede {
   background: var(--paper-warm);
   border-radius: 20px;
   padding: 40px 32px;
-  border: 1px solid var(--rule);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -1415,7 +1414,6 @@ section.dark .head .lede {
   grid-column: span 2;
   background: var(--ink);
   color: var(--paper);
-  border: none;
   background-image:
     radial-gradient(
       circle at 80% 20%,
@@ -1427,9 +1425,6 @@ section.dark .head .lede {
 .module-card.feature .mod-num,
 .module-card.feature .mod-meta {
   color: rgba(255, 255, 255, 0.5);
-}
-.module-card.feature .mod-meta {
-  border-top-color: rgba(255, 255, 255, 0.12);
 }
 .module-card.feature p {
   color: rgba(255, 255, 255, 0.78);
@@ -1455,8 +1450,6 @@ section.dark .head .lede {
 }
 .mod-meta {
   margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid var(--rule);
   font-size: 12px;
   color: var(--muted);
   letter-spacing: 0.04em;
