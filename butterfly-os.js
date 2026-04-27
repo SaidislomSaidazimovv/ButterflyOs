@@ -160,3 +160,75 @@
 
   if (helpOpenBtn) helpOpenBtn.addEventListener('click', openHelpModal);
   helpCloseTargets.forEach(el => el.addEventListener('click', closeHelpModal));
+
+  // ─── Cultural butterfly video — seamless crossfade loop ───
+  // Two <video> elements playing the same clip. When the active one nears
+  // its end, the passive one starts from 0 and they crossfade — hiding the
+  // visible "snap" that occurs when a video naturally loops on a clip
+  // whose first and last frames don't match.
+  (function setupCulturalVideoLoop() {
+    const a = document.querySelector('.viz-cultural-video-a');
+    const b = document.querySelector('.viz-cultural-video-b');
+    if (!a || !b) return;
+
+    const OVERLAP = 0.7; // seconds of crossfade
+    let activeIsA = true;
+    let started = false;
+
+    function tick() {
+      if (!started) return;
+      requestAnimationFrame(tick);
+      if (!isFinite(a.duration) || !isFinite(b.duration)) return;
+
+      const active = activeIsA ? a : b;
+      const passive = activeIsA ? b : a;
+      const dur = active.duration;
+      const t = active.currentTime;
+      const remaining = dur - t;
+
+      // Start passive when active enters the crossfade window
+      if (remaining <= OVERLAP && passive.paused) {
+        passive.currentTime = 0;
+        const p = passive.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      }
+
+      // Crossfade opacities
+      if (remaining <= OVERLAP) {
+        const fade = Math.max(0, Math.min(1, remaining / OVERLAP));
+        active.style.opacity = String(fade);
+        passive.style.opacity = String(1 - fade);
+      } else {
+        active.style.opacity = '1';
+        passive.style.opacity = '0';
+      }
+
+      // Swap roles when active reaches its end
+      if (t >= dur - 0.05) {
+        active.pause();
+        active.currentTime = 0;
+        active.style.opacity = '0';
+        activeIsA = !activeIsA;
+      }
+    }
+
+    function maybeStart() {
+      if (started) return;
+      if (!isFinite(a.duration) || !isFinite(b.duration)) return;
+      started = true;
+      requestAnimationFrame(tick);
+    }
+
+    a.addEventListener('loadedmetadata', maybeStart);
+    b.addEventListener('loadedmetadata', maybeStart);
+    if (isFinite(a.duration) && isFinite(b.duration)) maybeStart();
+
+    // Honor reduced motion: pause both, show first frame of A only
+    if (window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      a.pause();
+      b.pause();
+      a.style.opacity = '1';
+      b.style.opacity = '0';
+    }
+  })();
