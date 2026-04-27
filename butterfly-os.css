@@ -590,40 +590,46 @@ section.dark .head .lede {
 
 /* ─── ARCHITECTURE VISUALIZATIONS — entrance + continuous ─── */
 
-/* Cultural — flowing wave field */
+/* Cultural — single butterfly with gently flapping wings */
 .viz-cultural {
-  overflow: hidden;
+  overflow: visible;
 }
-.viz-cultural .cult-wave {
-  fill: none;
+.viz-cultural .cult-butterfly {
   opacity: 0;
-  will-change: transform, opacity;
+}
+.architecture-stack.in .viz-cultural .cult-butterfly {
+  animation: cultButterflyAppear 1s 0.3s ease forwards;
+}
+.viz-cultural .cult-wing {
+  transform-box: fill-box;
+  will-change: transform;
+}
+.viz-cultural .cult-wing-left {
+  transform-origin: right center;
+}
+.viz-cultural .cult-wing-right {
+  transform-origin: left center;
+}
+.architecture-stack.in .viz-cultural .cult-wing {
+  animation: cultButterflyFlap 2.6s 1.2s ease-in-out infinite;
+}
+.viz-cultural .cult-body,
+.viz-cultural .cult-head {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
 }
 
-.architecture-stack.in .viz-cultural .cult-wave-1 {
-  animation:
-    cultWaveAppear 1s 0.4s ease forwards,
-    cultWaveFlow 9s 0.4s linear infinite;
-}
-.architecture-stack.in .viz-cultural .cult-wave-2 {
-  animation:
-    cultWaveAppear 1s 0.6s ease forwards,
-    cultWaveFlow 13s 0.6s linear infinite;
-}
-.architecture-stack.in .viz-cultural .cult-wave-3 {
-  animation:
-    cultWaveAppear 1s 0.8s ease forwards,
-    cultWaveFlow 7s 0.8s linear infinite;
-}
-
-@keyframes cultWaveAppear {
+@keyframes cultButterflyAppear {
   to {
     opacity: 1;
   }
 }
-@keyframes cultWaveFlow {
-  to {
-    transform: translateX(-280px);
+@keyframes cultButterflyFlap {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.72);
   }
 }
 
