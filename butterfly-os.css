@@ -592,18 +592,17 @@ section.dark .head .lede {
 
 /* Cultural — looping butterfly video with black bg dissolved into the card.
    Two stacked <video> elements crossfade at the loop boundary so the
-   end-of-clip jump is hidden behind a 0.6s opacity dissolve. */
+   end-of-clip jump is hidden behind a 0.7s opacity dissolve.
+   The wrap MUST stay at opacity:1 always — any parent with opacity<1
+   creates a stacking-context isolation that breaks the children's
+   mix-blend-mode: screen against the card's gradient backdrop. */
 .viz-cultural-wrap {
   position: relative;
   display: block;
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-.architecture-stack.in .viz-cultural-wrap {
-  opacity: 1;
+  isolation: auto;
 }
 .viz-cultural-video {
   display: block;
@@ -617,6 +616,13 @@ section.dark .head .lede {
   position: absolute;
   inset: 0;
   opacity: 0;
+}
+/* Override the global .reveal opacity-fade on the architecture stack so
+   mix-blend-mode keeps working from frame one. The stack still slides
+   up via the reveal's transform, but stays fully opaque throughout. */
+.architecture-stack.reveal,
+.architecture-stack.reveal.in {
+  opacity: 1;
 }
 
 /* Institutional — initial states */
