@@ -1328,10 +1328,10 @@ section.dark .head .lede {
   white-space: nowrap;
 }
 
-/* ─── GLOBAL FLAGS — paper-warm visual statement ───────── */
+/* ─── GLOBAL FLAGS — image on pure white, edges dissolved ───────── */
 .global-flags-section {
   padding: 130px 24px 160px;
-  background: var(--paper-warm);
+  background: var(--paper);
   text-align: center;
 }
 .global-flags-eyebrow {
@@ -1360,14 +1360,15 @@ section.dark .head .lede {
 .global-flags-wrap {
   max-width: 1280px;
   margin: 0 auto;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.12);
 }
 .global-flags-image {
   display: block;
   width: 100%;
   height: auto;
+  /* Section bg matches image bg (white). Multiply blend mode also
+     dissolves any anti-aliased edge pixels into the page so the
+     butterflies appear to float directly on the site. */
+  mix-blend-mode: multiply;
 }
 
 /* ─── NETWORKS — PARTNER ADOPTION LAYER ───────────────── */
