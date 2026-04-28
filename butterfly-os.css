@@ -2508,7 +2508,38 @@ footer {
   /* Global Flags section — tighten section padding so the image
      doesn't crowd the section edges. */
   .global-flags-section {
-    padding: 100px 20px 110px;
+    padding: 80px 20px 50px;
+  }
+  /* The flags image is a single 21-col grid PNG. At width:100%
+     on a phone, each butterfly renders ~16px wide and is barely
+     readable. Display it at a fixed comfortable height instead
+     and let the user scroll horizontally to see all of them.
+     Each butterfly becomes ~36-40px tall — clearly recognizable. */
+  .global-flags-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 0 20px 12px;
+    scrollbar-width: thin;
+    /* Soft fade on the right edge hints that more scrolls into view */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      black 0,
+      black calc(100% - 28px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      black 0,
+      black calc(100% - 28px),
+      transparent 100%
+    );
+  }
+  .global-flags-image {
+    width: auto;
+    max-width: none;
+    height: 380px;
   }
 
   /* CTA bridge wrapper */
@@ -2607,6 +2638,14 @@ footer {
   /* Outcomes */
   .outcomes-section {
     padding: 100px 20px;
+  }
+
+  /* Emotional Infrastructure section — was inheriting 160px desktop
+     padding so the empty space directly below the global-flags
+     image was huge on phones (both sections share paper background,
+     so the gap reads as one void). */
+  .infra-section {
+    padding: 70px 20px 90px;
   }
 
   /* Closing seal */
