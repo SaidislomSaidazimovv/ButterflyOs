@@ -730,46 +730,146 @@ section.dark .head .lede {
   opacity: 1;
 }
 
-/* Institutional — wireframe butterfly blueprint.
-   Mirrors the cultural card's live butterfly video as an outlined
-   "blueprint" form: the symbol that culture has today, drawn as
-   the structure / infrastructure to come. Same composition, two
-   states — alive (filled video) vs structural (outlined draw-in). */
-.viz-institutional .inst-wing {
-  stroke-dasharray: 700;
-  stroke-dashoffset: 700;
+/* Institutional — naturalist's butterfly sketch (4 wings + veins +
+   segmented body + clubbed antennae + accent eyespots).
+   Animates like an architect's plotter inking a field-guide
+   illustration: frame ticks first, then antennae, then the four
+   wing outlines draw in, then the wing veins fade in, then the
+   body and accent details settle. */
+
+/* Initial states */
+.viz-institutional .inst-marks line {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 22;
 }
-.viz-institutional .inst-body,
-.viz-institutional .inst-head {
+.viz-institutional .inst-antenna {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+}
+.viz-institutional .inst-antenna-tip,
+.viz-institutional .inst-spots circle {
   opacity: 0;
-  transform: scale(0.5);
+  transform: scale(0);
   transform-origin: center;
   transform-box: fill-box;
 }
-.viz-institutional .inst-marks line {
-  stroke-dasharray: 20;
-  stroke-dashoffset: 20;
+.viz-institutional .inst-wing {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+}
+.viz-institutional .inst-veins path {
+  opacity: 0;
+}
+.viz-institutional .inst-body-group > circle,
+.viz-institutional .inst-body-group > ellipse,
+.viz-institutional .inst-body-group > path {
+  opacity: 0;
+  transform: scale(0.4);
+  transform-origin: 140px 140px;
+}
+.viz-institutional .inst-segments line {
+  opacity: 0;
 }
 
+/* Entrance + continuous (triggered by .architecture-stack.in) */
 .architecture-stack.in .viz-institutional .inst-marks line {
-  animation: instMarkDraw 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1)
-    forwards;
+  animation: instMarkDraw 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.architecture-stack.in .viz-institutional .inst-wing-l {
-  animation:
-    instWingDraw 2.2s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instStrokePulse 4.5s 2.8s ease-in-out infinite;
+.architecture-stack.in .viz-institutional .inst-antenna-l {
+  animation: instAntennaDraw 0.6s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.architecture-stack.in .viz-institutional .inst-wing-r {
+.architecture-stack.in .viz-institutional .inst-antenna-r {
+  animation: instAntennaDraw 0.6s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.architecture-stack.in .viz-institutional .inst-antenna-tip-l {
+  animation: instTipPop 0.4s 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.architecture-stack.in .viz-institutional .inst-antenna-tip-r {
+  animation: instTipPop 0.4s 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Forewings draw first (drawn outward from body) */
+.architecture-stack.in .viz-institutional .inst-wing-fl {
   animation:
     instWingDraw 2.2s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instStrokePulse 4.5s 3.4s ease-in-out infinite;
+    instStrokePulse 5s 3.8s ease-in-out infinite;
 }
-.architecture-stack.in .viz-institutional .inst-body,
+.architecture-stack.in .viz-institutional .inst-wing-fr {
+  animation:
+    instWingDraw 2.2s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instStrokePulse 5s 4.2s ease-in-out infinite;
+}
+/* Hindwings start drawing slightly after the forewings */
+.architecture-stack.in .viz-institutional .inst-wing-hl {
+  animation:
+    instWingDraw 2s 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instStrokePulse 5s 4.6s ease-in-out infinite;
+}
+.architecture-stack.in .viz-institutional .inst-wing-hr {
+  animation:
+    instWingDraw 2s 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instStrokePulse 5s 5s ease-in-out infinite;
+}
+
+/* Wing veins fade in after their parent wing has nearly finished drawing */
+.architecture-stack.in .viz-institutional .inst-veins-fl path {
+  animation: instVeinFade 0.8s 2.2s ease forwards;
+}
+.architecture-stack.in .viz-institutional .inst-veins-fr path {
+  animation: instVeinFade 0.8s 2.4s ease forwards;
+}
+.architecture-stack.in .viz-institutional .inst-veins-hl path {
+  animation: instVeinFade 0.8s 2.8s ease forwards;
+}
+.architecture-stack.in .viz-institutional .inst-veins-hr path {
+  animation: instVeinFade 0.8s 3s ease forwards;
+}
+
+/* Body components pop in late so the wings settle around them */
 .architecture-stack.in .viz-institutional .inst-head {
   animation:
-    instBodyAppear 0.8s 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-    instCenterGlow 3s 3s ease-in-out infinite;
+    instBodyPop 0.7s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+    instBodyGlow 4s 3.5s ease-in-out infinite;
+}
+.architecture-stack.in .viz-institutional .inst-thorax {
+  animation: instBodyPop 0.7s 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.architecture-stack.in .viz-institutional .inst-abdomen {
+  animation: instBodyPop 0.7s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.architecture-stack.in .viz-institutional .inst-segments line {
+  animation: instSegmentFade 0.5s 1.5s ease forwards;
+}
+.architecture-stack.in .viz-institutional .inst-segments line:nth-child(2) {
+  animation-delay: 1.6s;
+}
+.architecture-stack.in .viz-institutional .inst-segments line:nth-child(3) {
+  animation-delay: 1.7s;
+}
+.architecture-stack.in .viz-institutional .inst-segments line:nth-child(4) {
+  animation-delay: 1.8s;
+}
+.architecture-stack.in .viz-institutional .inst-segments line:nth-child(5) {
+  animation-delay: 1.9s;
+}
+
+/* Wing accent dots (eyespots) appear last, like a sketch artist
+   adding final details */
+.architecture-stack.in .viz-institutional .inst-spots circle {
+  animation: instSpotPop 0.5s var(--spot-delay, 3.4s)
+    cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.architecture-stack.in .viz-institutional .inst-spots circle:nth-child(1) {
+  --spot-delay: 3.4s;
+}
+.architecture-stack.in .viz-institutional .inst-spots circle:nth-child(2) {
+  --spot-delay: 3.5s;
+}
+.architecture-stack.in .viz-institutional .inst-spots circle:nth-child(3) {
+  --spot-delay: 3.7s;
+}
+.architecture-stack.in .viz-institutional .inst-spots circle:nth-child(4) {
+  --spot-delay: 3.8s;
 }
 
 @keyframes instMarkDraw {
@@ -777,14 +877,41 @@ section.dark .head .lede {
     stroke-dashoffset: 0;
   }
 }
+@keyframes instAntennaDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes instTipPop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 @keyframes instWingDraw {
   to {
     stroke-dashoffset: 0;
   }
 }
-@keyframes instBodyAppear {
+@keyframes instVeinFade {
   to {
     opacity: 0.85;
+  }
+}
+@keyframes instBodyPop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes instSegmentFade {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes instSpotPop {
+  to {
+    opacity: 0.65;
     transform: scale(1);
   }
 }
@@ -797,15 +924,13 @@ section.dark .head .lede {
     stroke-opacity: 0.55;
   }
 }
-@keyframes instCenterGlow {
+@keyframes instBodyGlow {
   0%,
   100% {
-    opacity: 0.85;
-    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
   }
   50% {
-    opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
   }
 }
 
@@ -814,18 +939,26 @@ section.dark .head .lede {
   .viz-cultural .cult-ring,
   .viz-cultural .cult-nodes circle,
   .viz-cultural .cult-center,
+  .viz-institutional .inst-marks line,
+  .viz-institutional .inst-antenna,
+  .viz-institutional .inst-antenna-tip,
   .viz-institutional .inst-wing,
-  .viz-institutional .inst-body,
-  .viz-institutional .inst-head,
-  .viz-institutional .inst-marks line {
+  .viz-institutional .inst-veins path,
+  .viz-institutional .inst-body-group > circle,
+  .viz-institutional .inst-body-group > ellipse,
+  .viz-institutional .inst-body-group > path,
+  .viz-institutional .inst-segments line,
+  .viz-institutional .inst-spots circle {
     opacity: 1;
     transform: none;
     stroke-dashoffset: 0;
     animation: none !important;
   }
-  .viz-institutional .inst-body,
-  .viz-institutional .inst-head {
+  .viz-institutional .inst-veins path {
     opacity: 0.85;
+  }
+  .viz-institutional .inst-spots circle {
+    opacity: 0.65;
   }
 }
 .architecture-stack .layer-card.cultural::after {
