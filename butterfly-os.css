@@ -38,6 +38,7 @@ html {
   -webkit-font-smoothing: antialiased;
   scrollbar-width: thin;
   scrollbar-color: rgba(110, 110, 115, 0.5) transparent;
+  overflow-x: hidden;
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -2378,4 +2379,190 @@ footer {
 }
 .reveal.d4 {
   transition-delay: 0.4s;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE OPTIMIZATION — fixes for narrow viewports
+   ═══════════════════════════════════════════════════════════ */
+
+/* Tablet and below */
+@media (max-width: 740px) {
+  /* "One humanity. Many flags. One butterfly..." was forced onto a
+     single line via white-space: nowrap, overflowing the viewport
+     and causing horizontal scroll. On mobile let it wrap normally. */
+  .flags-section .flag-sub {
+    white-space: normal;
+    max-width: 540px;
+    padding: 0 24px;
+    line-height: 1.5;
+  }
+
+  /* Architecture cards — base padding (64px 48px) is too generous on
+     small screens. Tighten to 40px lateral / 56px vertical. */
+  .architecture-stack .layer-card {
+    padding: 56px 28px;
+  }
+
+  /* Global Flags section — tighten section padding so the image
+     doesn't crowd the section edges. */
+  .global-flags-section {
+    padding: 100px 20px 110px;
+  }
+
+  /* CTA bridge wrapper */
+  .cta-bridge {
+    padding: 100px 20px;
+  }
+
+  /* Architecture lede h2 — text-wrap balance + nbsp can produce
+     awkward narrow-screen wraps; let it flow more naturally. */
+  .head h2 {
+    text-wrap: pretty;
+  }
+}
+
+/* Phone — small to medium */
+@media (max-width: 540px) {
+  /* Help button — was too wide on narrow viewports because its
+     ~280px content overhang plus 24px right margin pushed it
+     toward (or past) the viewport's left edge. Compact it and
+     pin a max-width so it can never escape the viewport. */
+  .help-button {
+    bottom: 16px;
+    right: 16px;
+    padding: 9px 14px;
+    font-size: 11.5px;
+    max-width: calc(100vw - 32px);
+    box-sizing: border-box;
+  }
+  .help-button .dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  /* Tighter season-section padding */
+  .seasons-section {
+    padding: 90px 16px 110px;
+  }
+
+  /* The Symbol section — large padding on small screens wastes space */
+  .symbol-section {
+    padding: 100px 20px;
+  }
+
+  /* The Sign section */
+  .sign-section {
+    padding: 100px 20px;
+  }
+
+  /* Stats section */
+  .stats-section {
+    padding: 90px 20px;
+  }
+
+  /* Problem statement */
+  .problem-statement {
+    padding: 110px 20px;
+  }
+
+  /* Outcomes */
+  .outcomes-section {
+    padding: 100px 20px;
+  }
+
+  /* Closing seal */
+  .closing {
+    padding: 110px 20px;
+  }
+
+  /* Architecture inner cards — tighter still */
+  .architecture-stack .layer-card {
+    padding: 44px 22px;
+  }
+
+  /* Layer card heading scales down a hair */
+  .layer-card h3 {
+    font-size: clamp(28px, 6.5vw, 36px);
+  }
+  .layer-card p {
+    font-size: 15px;
+  }
+
+  /* Season detail panel — open state padding override.
+     Without this, mobile open uses the desktop 56px 48px which is
+     too wide for a 320–400px viewport. */
+  .season-detail.open {
+    padding: 36px 22px;
+  }
+  .season-detail .det-eyebrow,
+  .season-detail h3,
+  .season-detail .det-sub,
+  .season-detail .det-body {
+    word-break: break-word;
+  }
+
+  /* Hero text safety */
+  .hero h1 {
+    font-size: clamp(40px, 12vw, 72px);
+  }
+  .hero .tagline {
+    font-size: clamp(15px, 4vw, 18px);
+    padding: 0 8px;
+  }
+
+  /* Contact email — ensure it never overflows */
+  .contact-email {
+    font-size: clamp(20px, 6vw, 30px);
+    word-break: break-word;
+  }
+
+  /* Global flags heading scales */
+  .global-flags-heading {
+    font-size: clamp(28px, 7.5vw, 42px);
+  }
+
+  /* Section heads scale */
+  .head h2 {
+    font-size: clamp(28px, 7.5vw, 48px);
+  }
+  .stats-head h2 {
+    font-size: clamp(28px, 7vw, 42px);
+  }
+  .month-section h2 {
+    font-size: clamp(40px, 12vw, 72px);
+  }
+  .closing h2 {
+    font-size: clamp(28px, 7vw, 48px);
+  }
+  .closing .you-not-alone {
+    font-size: clamp(22px, 5.5vw, 32px);
+  }
+}
+
+/* Very narrow phones (iPhone SE 1st gen, older Androids) */
+@media (max-width: 380px) {
+  .help-button {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+  .architecture-stack .layer-card {
+    padding: 36px 18px;
+  }
+  .layer-card h3 {
+    font-size: 26px;
+  }
+  .layer-card p {
+    font-size: 14px;
+  }
+  .global-flags-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+  }
+  .contact-email {
+    font-size: 20px;
+  }
+  /* Stats numbers fit narrower */
+  .stat .num {
+    font-size: clamp(40px, 14vw, 64px);
+  }
 }
