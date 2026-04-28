@@ -820,25 +820,31 @@ section.dark .head .lede {
 .architecture-stack.in .viz-institutional .inst-stem {
   animation:
     instStemGrow 2s 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instSway 5s 4s ease-in-out infinite;
+    instSway 7s 4s ease-in-out infinite;
   transform-origin: 140px 210px;
+  will-change: transform;
 }
 
-/* Each leaf unfurls in sequence, bottom to top */
+/* Each leaf unfurls in sequence, bottom to top.
+   Sway durations are intentionally non-divisible so the three
+   leaves never re-sync, keeping the motion organic. */
 .architecture-stack.in .viz-institutional .inst-leaf-1 {
   animation:
     instLeafUnfurl 0.9s 2.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-    instLeafSway 5.5s 4.5s ease-in-out infinite;
+    instLeafSway 6.5s 4.5s ease-in-out infinite;
+  will-change: transform;
 }
 .architecture-stack.in .viz-institutional .inst-leaf-2 {
   animation:
     instLeafUnfurl 0.9s 2.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-    instLeafSwayR 5s 5s ease-in-out infinite;
+    instLeafSwayR 7.3s 5s ease-in-out infinite;
+  will-change: transform;
 }
 .architecture-stack.in .viz-institutional .inst-leaf-3 {
   animation:
     instLeafUnfurl 0.9s 3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-    instLeafSwayTop 6s 5.5s ease-in-out infinite;
+    instLeafSwayTop 8.1s 5.5s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Veins fade in after their leaf has unfurled */
@@ -883,40 +889,48 @@ section.dark .head .lede {
     opacity: 1;
   }
 }
+/* Sway keyframes — every 0%/100% pair sits at neutral
+   (rotate 0deg, scale 1). This means:
+     1. The entrance animation (which ends at scale(1) no rotation)
+        hands off seamlessly to the sway with no visible snap.
+     2. The loop boundary itself is invisible because frame 0 and
+        frame 100 are identical.
+   Each animation has its own peak direction and amplitude so the
+   stem and three leaves never sway in sync. */
 @keyframes instSway {
   0%,
   100% {
-    transform: rotate(-1deg);
+    transform: rotate(0deg);
   }
   50% {
-    transform: rotate(1deg);
+    transform: rotate(1.2deg);
   }
 }
 @keyframes instLeafSway {
   0%,
   100% {
-    transform: scale(1) rotate(-2deg);
+    transform: scale(1) rotate(0deg);
   }
   50% {
-    transform: scale(1.02) rotate(1deg);
+    transform: scale(1.015) rotate(2.2deg);
   }
 }
 @keyframes instLeafSwayR {
   0%,
   100% {
-    transform: scale(1) rotate(2deg);
+    transform: scale(1) rotate(0deg);
   }
   50% {
-    transform: scale(1.02) rotate(-1deg);
+    transform: scale(1.015) rotate(-2deg);
   }
 }
 @keyframes instLeafSwayTop {
   0%,
   100% {
-    transform: scale(1) rotate(-1deg);
+    transform: scale(1) rotate(0deg);
   }
   50% {
-    transform: scale(1.04) rotate(1deg);
+    transform: scale(1.025) rotate(1.5deg);
   }
 }
 
