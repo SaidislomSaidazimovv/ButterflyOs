@@ -1424,43 +1424,24 @@ section.dark .head .lede {
      butterflies appear to float directly on the site. */
   mix-blend-mode: multiply;
 }
-/* Mobile-only stacked-rows layout. The flags image has 21 columns
-   of butterflies; 21 / 3 = 7, so we can split it into three vertical
-   slices that break cleanly between butterflies. Each <img> is scaled
-   to 300% width inside an overflow:hidden row, then translated -33%
-   / -66% to expose its slice. Stacked vertically, the user sees all
-   ~210 butterflies at ~50px each (vs ~16px when displayed at 100%
-   width on a phone). No horizontal scroll required. */
-.global-flags-mobile-stack {
+/* Mobile rendering uses a single <canvas> that draws three horizontal
+   slices of the SAME source bitmap stacked vertically. The image has
+   21 columns of butterflies; 21 / 3 = 7, so each slice breaks cleanly
+   between butterflies. The <img> stays in the DOM (loaded once) but is
+   hidden — the canvas reads pixels from it. Result: ~50px butterflies,
+   no horizontal scroll, one image asset, no clones. */
+.global-flags-canvas {
   display: none;
 }
 @media (max-width: 540px) {
   .global-flags-image {
     display: none;
   }
-  .global-flags-mobile-stack {
+  .global-flags-canvas {
     display: block;
     width: 100%;
-  }
-  .flags-row {
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-  }
-  .flags-row-img {
-    display: block;
-    width: 300%;
     height: auto;
     mix-blend-mode: multiply;
-  }
-  .flags-row-img-1 {
-    transform: translateX(0);
-  }
-  .flags-row-img-2 {
-    transform: translateX(-33.3333%);
-  }
-  .flags-row-img-3 {
-    transform: translateX(-66.6666%);
   }
 }
 

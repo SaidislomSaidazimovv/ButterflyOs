@@ -335,3 +335,60 @@
       }
     });
   })();
+
+  // ─── GLOBAL FLAGS — mobile canvas renderer ─────────────────
+  // Single source <img> drawn as three vertical slices to one <canvas>.
+  // No DOM clones; pixels are drawn from the same loaded image.
+  (function flagsCanvas() {
+    const img = document.querySelector('.global-flags-image');
+    const canvas = document.querySelector('.global-flags-canvas');
+    if (!img || !canvas) return;
+    const SLICES = 3;
+    const MQ = window.matchMedia('(max-width: 540px)');
+
+    function render() {
+      if (!MQ.matches) return;
+      if (!img.complete || !img.naturalWidth) return;
+      const cssW = canvas.clientWidth;
+      if (!cssW) return;
+      const dpr = window.devicePixelRatio || 1;
+      const srcW = img.naturalWidth;
+      const srcH = img.naturalHeight;
+      const sliceW = srcW / SLICES;          // source slice width
+      const sliceH = srcH;                    // full image height per slice
+      // Each slice is drawn at full canvas width; its rendered height
+      // preserves aspect ratio of the slice (sliceW × sliceH).
+      const dstH = cssW * (sliceH / sliceW);
+      const totalCssH = dstH * SLICES;
+      // Set CSS height so the canvas reserves vertical space.
+      canvas.style.height = totalCssH + 'px';
+      // Backing store sized to device pixels for crisp rendering.
+      canvas.width = Math.round(cssW * dpr);
+      canvas.height = Math.round(totalCssH * dpr);
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingQuality = 'high';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, cssW, totalCssH);
+      for (let i = 0; i < SLICES; i++) {
+        ctx.drawImage(
+          img,
+          i * sliceW, 0, sliceW, sliceH,   // source rect
+          0, i * dstH, cssW, dstH          // destination rect
+        );
+      }
+    }
+
+    if (img.complete && img.naturalWidth) {
+      render();
+    } else {
+      img.addEventListener('load', render, { once: true });
+    }
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(render, 100);
+    });
+    if (typeof MQ.addEventListener === 'function') {
+      MQ.addEventListener('change', render);
+    }
+  })();
