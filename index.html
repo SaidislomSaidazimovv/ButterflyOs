@@ -131,16 +131,31 @@
       <div class="layer-card-viz" aria-hidden="true">
         <svg class="viz-institutional" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" fill="none">
           <defs>
-            <linearGradient id="instLine" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="rgba(29, 233, 197, 0)"/>
-              <stop offset="20%" stop-color="rgba(29, 233, 197, 0.85)"/>
-              <stop offset="80%" stop-color="rgba(91, 169, 255, 0.85)"/>
-              <stop offset="100%" stop-color="rgba(91, 169, 255, 0)"/>
+            <linearGradient id="instWingL" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1de9c5" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#0a7d79" stop-opacity="0.65"/>
+            </linearGradient>
+            <linearGradient id="instWingR" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#5ba9ff" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#1a3a8c" stop-opacity="0.65"/>
             </linearGradient>
           </defs>
-          <line class="inst-line inst-line-1" x1="40" y1="100" x2="240" y2="100" stroke="url(#instLine)" stroke-width="2" stroke-linecap="round"/>
-          <line class="inst-line inst-line-2" x1="40" y1="140" x2="240" y2="140" stroke="url(#instLine)" stroke-width="2" stroke-linecap="round"/>
-          <line class="inst-line inst-line-3" x1="40" y1="180" x2="240" y2="180" stroke="url(#instLine)" stroke-width="2" stroke-linecap="round"/>
+          <g class="inst-marks" stroke="rgba(255,255,255,0.28)" stroke-width="1" stroke-linecap="square">
+            <line x1="20" y1="20" x2="40" y2="20"/>
+            <line x1="20" y1="20" x2="20" y2="40"/>
+            <line x1="240" y1="20" x2="260" y2="20"/>
+            <line x1="260" y1="20" x2="260" y2="40"/>
+            <line x1="20" y1="240" x2="20" y2="260"/>
+            <line x1="20" y1="260" x2="40" y2="260"/>
+            <line x1="260" y1="240" x2="260" y2="260"/>
+            <line x1="240" y1="260" x2="260" y2="260"/>
+          </g>
+          <g class="inst-blueprint">
+            <path class="inst-wing inst-wing-l" d="M 140 140 C 100 75, 45 80, 45 130 C 45 195, 105 210, 140 140 Z" stroke="url(#instWingL)" stroke-width="1.5" stroke-linejoin="round"/>
+            <path class="inst-wing inst-wing-r" d="M 140 140 C 180 75, 235 80, 235 130 C 235 195, 175 210, 140 140 Z" stroke="url(#instWingR)" stroke-width="1.5" stroke-linejoin="round"/>
+            <line class="inst-body" x1="140" y1="115" x2="140" y2="178" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"/>
+            <circle class="inst-head" cx="140" cy="108" r="4" fill="rgba(255,255,255,0.7)"/>
+          </g>
         </svg>
       </div>
     </div>

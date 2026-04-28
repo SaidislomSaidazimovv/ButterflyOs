@@ -730,48 +730,82 @@ section.dark .head .lede {
   opacity: 1;
 }
 
-/* Institutional — three abstract horizontal lines, no labels.
-   Cleaner editorial replacement for the rails diagram with
-   ACCORD/INDEX/BONDS/ROUTING text that felt out of place. */
-.viz-institutional .inst-line {
+/* Institutional — wireframe butterfly blueprint.
+   Mirrors the cultural card's live butterfly video as an outlined
+   "blueprint" form: the symbol that culture has today, drawn as
+   the structure / infrastructure to come. Same composition, two
+   states — alive (filled video) vs structural (outlined draw-in). */
+.viz-institutional .inst-wing {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+}
+.viz-institutional .inst-body,
+.viz-institutional .inst-head {
   opacity: 0;
+  transform: scale(0.5);
   transform-origin: center;
   transform-box: fill-box;
 }
-
-.architecture-stack.in .viz-institutional .inst-line-1 {
-  animation:
-    instLineDraw 0.8s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instLinePulse 4s 1.4s ease-in-out infinite;
-}
-.architecture-stack.in .viz-institutional .inst-line-2 {
-  animation:
-    instLineDraw 0.8s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instLinePulse 4s 2.1s ease-in-out infinite;
-}
-.architecture-stack.in .viz-institutional .inst-line-3 {
-  animation:
-    instLineDraw 0.8s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instLinePulse 4s 2.8s ease-in-out infinite;
+.viz-institutional .inst-marks line {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
 }
 
-@keyframes instLineDraw {
-  from {
-    opacity: 0;
-    transform: scaleX(0.4);
-  }
+.architecture-stack.in .viz-institutional .inst-marks line {
+  animation: instMarkDraw 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+.architecture-stack.in .viz-institutional .inst-wing-l {
+  animation:
+    instWingDraw 2.2s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instStrokePulse 4.5s 2.8s ease-in-out infinite;
+}
+.architecture-stack.in .viz-institutional .inst-wing-r {
+  animation:
+    instWingDraw 2.2s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instStrokePulse 4.5s 3.4s ease-in-out infinite;
+}
+.architecture-stack.in .viz-institutional .inst-body,
+.architecture-stack.in .viz-institutional .inst-head {
+  animation:
+    instBodyAppear 0.8s 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+    instCenterGlow 3s 3s ease-in-out infinite;
+}
+
+@keyframes instMarkDraw {
   to {
-    opacity: 1;
-    transform: scaleX(1);
+    stroke-dashoffset: 0;
   }
 }
-@keyframes instLinePulse {
+@keyframes instWingDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes instBodyAppear {
+  to {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+}
+@keyframes instStrokePulse {
   0%,
   100% {
-    opacity: 1;
+    stroke-opacity: 1;
   }
   50% {
-    opacity: 0.45;
+    stroke-opacity: 0.55;
+  }
+}
+@keyframes instCenterGlow {
+  0%,
+  100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
   }
 }
 
@@ -780,10 +814,18 @@ section.dark .head .lede {
   .viz-cultural .cult-ring,
   .viz-cultural .cult-nodes circle,
   .viz-cultural .cult-center,
-  .viz-institutional .inst-line {
+  .viz-institutional .inst-wing,
+  .viz-institutional .inst-body,
+  .viz-institutional .inst-head,
+  .viz-institutional .inst-marks line {
     opacity: 1;
     transform: none;
+    stroke-dashoffset: 0;
     animation: none !important;
+  }
+  .viz-institutional .inst-body,
+  .viz-institutional .inst-head {
+    opacity: 0.85;
   }
 }
 .architecture-stack .layer-card.cultural::after {
