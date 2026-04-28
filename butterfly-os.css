@@ -220,12 +220,12 @@ nav {
 .tri-stack {
   margin-top: 72px;
   margin-bottom: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  display: flex;
+  justify-content: center;
 }
 .tri-line {
   padding: 28px 24px;
+  text-align: center;
 }
 .tri-line .key {
   font-size: clamp(20px, 2.4vw, 28px);
