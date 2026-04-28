@@ -730,26 +730,37 @@ section.dark .head .lede {
   opacity: 1;
 }
 
-/* Institutional — looping emotional-infrastructure video, mirrors
-   the cultural butterfly's two-video crossfade pattern. The black
-   background of the source clip dissolves into the card's ink
-   backdrop via mix-blend-mode: screen — same trick as the
-   butterfly card. */
+/* Institutional — looping emotional-infrastructure video.
+   Source clip is 9:16 portrait, but the cultural butterfly's
+   visual footprint is roughly square. Force a square render area
+   via aspect-ratio: 1/1 on the wrap, then object-fit: cover on
+   the videos centers and crops the source. Result: same on-screen
+   size and shape as the butterfly video next to it.
+
+   filter: contrast(1.06) brightness(0.92) crushes any near-black
+   pixels in the source toward pure 0,0,0 so mix-blend-mode: screen
+   can fully dissolve the background into the card's ink backdrop
+   with no faint rectangular trace. */
 .viz-institutional-wrap {
   position: relative;
   display: block;
   width: 100%;
   max-width: 300px;
+  aspect-ratio: 1 / 1;
   margin: 0 auto;
+  overflow: hidden;
   isolation: auto;
 }
 .viz-institutional-video {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   pointer-events: none;
   mix-blend-mode: screen;
   background: transparent;
+  filter: contrast(1.06) brightness(0.92);
 }
 .viz-institutional-video-b {
   position: absolute;
