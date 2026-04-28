@@ -2548,24 +2548,40 @@ footer {
   }
   /* "The full system" eyebrow + caption — was floating with too
      much air above and below on mobile. Tighten the chain:
-       - wrap less far below the season cards
+       - wrap sits much closer below the season cards / detail panel
        - eyebrow sits closer to its caption
        - caption hugs the eyebrow */
   .seasons-keynote-wrap {
-    margin-top: 48px;
+    margin-top: 28px;
   }
   .keynote-eyebrow {
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .seasons-keynote-caption {
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   /* Butterfly Month section — was inheriting desktop 160px padding,
      leaving a large empty space directly under the keynote caption
-     before the dial appeared. */
+     before the dial appeared. Both top and bottom trimmed so the
+     transition into the next dark flags-section is short. */
   .month-section {
-    padding: 90px 20px;
+    padding: 90px 20px 60px;
+  }
+  .month-pillars {
+    margin-top: 56px;
+  }
+
+  /* "One humanity. Many flags. One butterfly..." section — had no
+     mobile override, was inheriting desktop padding 130px / 160px
+     and an extra 56px margin-top on the text itself. Combined with
+     the prior section's padding-bottom this produced ~276px of
+     dark empty space on phones. Collapse aggressively. */
+  .flags-section {
+    padding: 40px 20px 70px;
+  }
+  .flags-section .flag-sub {
+    margin-top: 0;
   }
 
   /* The Symbol section — large padding on small screens wastes space */
