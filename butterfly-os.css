@@ -1540,6 +1540,13 @@ section.dark .head .lede {
   .partner-cta {
     padding: 40px 28px;
   }
+  /* On narrow screens the two CTA buttons wrap to separate lines.
+     Default margin: 0 6px leaves no vertical gap between wrapped
+     rows, so the buttons touch. Add vertical margin so wrapped
+     buttons get clean breathing room (16px gap between rows). */
+  .partner-cta .btn {
+    margin: 8px 6px;
+  }
 }
 
 /* Wrapper section when partner-cta is standalone (Networks section hidden) */
