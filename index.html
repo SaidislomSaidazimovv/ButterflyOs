@@ -131,16 +131,37 @@
       <div class="layer-card-viz" aria-hidden="true">
         <svg class="viz-institutional" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" fill="none">
           <defs>
-            <linearGradient id="instHeart" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1de9c5" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#5ba9ff" stop-opacity="0.75"/>
+            <linearGradient id="instFluid" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgba(29, 233, 197, 0)"/>
+              <stop offset="20%" stop-color="rgba(29, 233, 197, 0.85)"/>
+              <stop offset="80%" stop-color="rgba(91, 169, 255, 0.85)"/>
+              <stop offset="100%" stop-color="rgba(91, 169, 255, 0)"/>
+            </linearGradient>
+            <linearGradient id="instSolid" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#1de9c5" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#5ba9ff" stop-opacity="0.95"/>
             </linearGradient>
           </defs>
-          <g class="inst-heart-group">
-            <!-- Soft outer glow halo behind the heart -->
-            <path class="inst-heart-glow" d="M 140 220 C 70 175, 35 130, 55 90 C 75 60, 120 60, 140 100 C 160 60, 205 60, 225 90 C 245 130, 210 175, 140 220 Z" fill="url(#instHeart)" opacity="0.35"/>
-            <!-- Main heart silhouette -->
-            <path class="inst-heart" d="M 140 220 C 70 175, 35 130, 55 90 C 75 60, 120 60, 140 100 C 160 60, 205 60, 225 90 C 245 130, 210 175, 140 220 Z" fill="url(#instHeart)" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
+
+          <!-- TOP — Cultural fluid: flowing horizontal waves -->
+          <g class="inst-fluid" stroke-linecap="round">
+            <path class="inst-wave inst-wave-1" d="M-280 60 Q-245 45 -210 60 T-140 60 T-70 60 T0 60 T70 60 T140 60 T210 60 T280 60 T350 60 T420 60 T490 60 T560 60" stroke="url(#instFluid)" stroke-width="1.4"/>
+            <path class="inst-wave inst-wave-2" d="M-280 95 Q-245 80 -210 95 T-140 95 T-70 95 T0 95 T70 95 T140 95 T210 95 T280 95 T350 95 T420 95 T490 95 T560 95" stroke="url(#instFluid)" stroke-width="1.6"/>
+            <path class="inst-wave inst-wave-3" d="M-280 130 Q-245 120 -210 130 T-140 130 T-70 130 T0 130 T70 130 T140 130 T210 130 T280 130 T350 130 T420 130 T490 130 T560 130" stroke="url(#instFluid)" stroke-width="1.4"/>
+          </g>
+
+          <!-- MIDDLE — drips transitioning fluid to solid -->
+          <g class="inst-drips" fill="rgba(255,255,255,0.85)">
+            <circle class="inst-drip inst-drip-1" cx="70" cy="142" r="2"/>
+            <circle class="inst-drip inst-drip-2" cx="140" cy="142" r="2"/>
+            <circle class="inst-drip inst-drip-3" cx="210" cy="142" r="2"/>
+          </g>
+
+          <!-- BOTTOM — Institutional structure: solidified bars -->
+          <g class="inst-solid">
+            <rect class="inst-bar inst-bar-1" x="40" y="178" width="200" height="6" rx="3" fill="url(#instSolid)"/>
+            <rect class="inst-bar inst-bar-2" x="40" y="198" width="170" height="6" rx="3" fill="url(#instSolid)"/>
+            <rect class="inst-bar inst-bar-3" x="40" y="218" width="140" height="6" rx="3" fill="url(#instSolid)"/>
           </g>
         </svg>
       </div>

@@ -730,69 +730,129 @@ section.dark .head .lede {
   opacity: 1;
 }
 
-/* Institutional — heart silhouette, beating like a heartbeat.
-   Universal symbol of emotion / care, immediately readable as
-   "emotional infrastructure" without abstract interpretation. */
+/* Institutional — fluid pours into solid form.
+   Top: cultural waves flowing horizontally (the symbol is alive,
+   in motion). Middle: drips transitioning fluid into solid.
+   Bottom: institutional structure (bars) solidifying.
+   Visualizes the philosophical progression — culture flows first,
+   infrastructure solidifies after. */
 
-.viz-institutional .inst-heart-group {
-  transform-origin: 140px 145px;
+.viz-institutional {
+  overflow: hidden;
 }
-.viz-institutional .inst-heart,
-.viz-institutional .inst-heart-glow {
-  transform-origin: 140px 145px;
-  transform-box: view-box;
-}
-.viz-institutional .inst-heart-group {
+
+/* Initial states */
+.viz-institutional .inst-wave {
   opacity: 0;
-  transform: scale(0.6);
+  will-change: transform, opacity;
+}
+.viz-institutional .inst-drip {
+  opacity: 0;
+}
+.viz-institutional .inst-bar {
+  transform: scaleX(0);
+  transform-origin: left center;
   transform-box: fill-box;
 }
+.viz-institutional .inst-bar-1 {
+  --bar-rest: 0.95;
+}
+.viz-institutional .inst-bar-2 {
+  --bar-rest: 0.78;
+}
+.viz-institutional .inst-bar-3 {
+  --bar-rest: 0.6;
+}
 
-.architecture-stack.in .viz-institutional .inst-heart-group {
+/* Top — fluid waves flow continuously leftward, seamless because
+   wavelength 70 divides translation 280 evenly. */
+.architecture-stack.in .viz-institutional .inst-wave-1 {
   animation:
-    instHeartAppear 0.9s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-    instHeartBeat 1.4s 1.4s ease-in-out infinite;
+    instWaveAppear 1s 0.4s ease forwards,
+    instWaveFlow 11s 0.4s linear infinite;
 }
-.architecture-stack.in .viz-institutional .inst-heart-glow {
-  animation: instHeartGlow 1.4s 1.4s ease-in-out infinite;
+.architecture-stack.in .viz-institutional .inst-wave-2 {
+  animation:
+    instWaveAppear 1s 0.6s ease forwards,
+    instWaveFlow 9s 0.6s linear infinite;
+}
+.architecture-stack.in .viz-institutional .inst-wave-3 {
+  animation:
+    instWaveAppear 1s 0.8s ease forwards,
+    instWaveFlow 13s 0.8s linear infinite;
 }
 
-@keyframes instHeartAppear {
+/* Bottom — bars settle into place as the waves above flow,
+   then continuously pulse like a steady heartbeat of structure. */
+.architecture-stack.in .viz-institutional .inst-bar-1 {
+  animation:
+    instBarSettle 1s 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instBarPulse 4s 3.2s ease-in-out infinite;
+}
+.architecture-stack.in .viz-institutional .inst-bar-2 {
+  animation:
+    instBarSettle 1s 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instBarPulse 4s 3.6s ease-in-out infinite;
+}
+.architecture-stack.in .viz-institutional .inst-bar-3 {
+  animation:
+    instBarSettle 1s 1.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instBarPulse 4s 4s ease-in-out infinite;
+}
+
+/* Middle — drips fall periodically from waves toward bars,
+   visualizing the pour. Three desynced loops so a drip is
+   always in flight somewhere across the width. */
+.architecture-stack.in .viz-institutional .inst-drip-1 {
+  animation: instDripFall 3.2s 2.6s ease-in-out infinite;
+}
+.architecture-stack.in .viz-institutional .inst-drip-2 {
+  animation: instDripFall 3.2s 3.2s ease-in-out infinite;
+}
+.architecture-stack.in .viz-institutional .inst-drip-3 {
+  animation: instDripFall 3.2s 3.8s ease-in-out infinite;
+}
+
+@keyframes instWaveAppear {
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
-/* Real-heartbeat rhythm: lub-DUB-pause.
-   The double squeeze (10% and 30%) mimics the two heart sounds. */
-@keyframes instHeartBeat {
-  0%,
-  50%,
-  100% {
-    transform: scale(1);
+@keyframes instWaveFlow {
+  to {
+    transform: translateX(-280px);
   }
-  10% {
-    transform: scale(1.08);
+}
+@keyframes instBarSettle {
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes instBarPulse {
+  0%,
+  100% {
+    opacity: var(--bar-rest);
+  }
+  50% {
+    opacity: calc(var(--bar-rest) * 0.55);
+  }
+}
+@keyframes instDripFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px);
   }
   20% {
-    transform: scale(1.02);
+    opacity: 1;
+    transform: translateY(-2px);
   }
-  30% {
-    transform: scale(1.12);
+  70% {
+    opacity: 0.8;
+    transform: translateY(28px);
   }
-  40% {
-    transform: scale(1);
-  }
-}
-@keyframes instHeartGlow {
-  0%,
-  50%,
   100% {
-    opacity: 0.35;
-  }
-  10%,
-  30% {
-    opacity: 0.7;
+    opacity: 0;
+    transform: translateY(40px);
   }
 }
 
@@ -801,14 +861,24 @@ section.dark .head .lede {
   .viz-cultural .cult-ring,
   .viz-cultural .cult-nodes circle,
   .viz-cultural .cult-center,
-  .viz-institutional .inst-heart-group,
-  .viz-institutional .inst-heart-glow {
+  .viz-institutional .inst-wave,
+  .viz-institutional .inst-drip,
+  .viz-institutional .inst-bar {
     opacity: 1;
     transform: none;
     animation: none !important;
   }
-  .viz-institutional .inst-heart-glow {
-    opacity: 0.35;
+  .viz-institutional .inst-bar-1 {
+    opacity: 0.95;
+  }
+  .viz-institutional .inst-bar-2 {
+    opacity: 0.78;
+  }
+  .viz-institutional .inst-bar-3 {
+    opacity: 0.6;
+  }
+  .viz-institutional .inst-drip {
+    opacity: 0.7;
   }
 }
 .architecture-stack .layer-card.cultural::after {
