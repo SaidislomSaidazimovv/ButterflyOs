@@ -531,9 +531,6 @@ section.dark .head .lede {
 .architecture-stack .layer-card-text {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 32px;
-  min-height: 100%;
 }
 .architecture-stack .layer-card-text > div:first-child {
   display: flex;
