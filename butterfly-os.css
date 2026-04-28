@@ -2542,9 +2542,30 @@ footer {
     height: 7px;
   }
 
-  /* Tighter season-section padding */
+  /* Tighter season-section padding (less bottom space below caption) */
   .seasons-section {
-    padding: 90px 16px 110px;
+    padding: 90px 16px 56px;
+  }
+  /* "The full system" eyebrow + caption — was floating with too
+     much air above and below on mobile. Tighten the chain:
+       - wrap less far below the season cards
+       - eyebrow sits closer to its caption
+       - caption hugs the eyebrow */
+  .seasons-keynote-wrap {
+    margin-top: 48px;
+  }
+  .keynote-eyebrow {
+    margin-bottom: 14px;
+  }
+  .seasons-keynote-caption {
+    margin-top: 12px;
+  }
+
+  /* Butterfly Month section — was inheriting desktop 160px padding,
+     leaving a large empty space directly under the keynote caption
+     before the dial appeared. */
+  .month-section {
+    padding: 90px 20px;
   }
 
   /* The Symbol section — large padding on small screens wastes space */
