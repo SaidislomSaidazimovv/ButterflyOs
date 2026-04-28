@@ -233,6 +233,71 @@
     }
   })();
 
+  // ─── Institutional emotional-infrastructure video — same
+  //     dual-video crossfade pattern as the cultural butterfly. ───
+  (function setupInstitutionalVideoLoop() {
+    const a = document.querySelector('.viz-institutional-video-a');
+    const b = document.querySelector('.viz-institutional-video-b');
+    if (!a || !b) return;
+
+    const OVERLAP = 0.7;
+    let activeIsA = true;
+    let started = false;
+
+    function tick() {
+      if (!started) return;
+      requestAnimationFrame(tick);
+      if (!isFinite(a.duration) || !isFinite(b.duration)) return;
+
+      const active = activeIsA ? a : b;
+      const passive = activeIsA ? b : a;
+      const dur = active.duration;
+      const t = active.currentTime;
+      const remaining = dur - t;
+
+      if (remaining <= OVERLAP && passive.paused) {
+        passive.currentTime = 0;
+        const p = passive.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      }
+
+      if (remaining <= OVERLAP) {
+        const fade = Math.max(0, Math.min(1, remaining / OVERLAP));
+        active.style.opacity = String(fade);
+        passive.style.opacity = String(1 - fade);
+      } else {
+        active.style.opacity = '1';
+        passive.style.opacity = '0';
+      }
+
+      if (t >= dur - 0.05) {
+        active.pause();
+        active.currentTime = 0;
+        active.style.opacity = '0';
+        activeIsA = !activeIsA;
+      }
+    }
+
+    function maybeStart() {
+      if (started) return;
+      if (!isFinite(a.duration) || !isFinite(b.duration)) return;
+      started = true;
+      requestAnimationFrame(tick);
+    }
+
+    a.addEventListener('loadedmetadata', maybeStart);
+    b.addEventListener('loadedmetadata', maybeStart);
+    if (isFinite(a.duration) && isFinite(b.duration)) maybeStart();
+
+    if (window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      a.pause();
+      b.pause();
+      a.style.opacity = '1';
+      b.style.opacity = '0';
+    }
+  })();
+
   // ─── Mobile nav toggle ───
   (function setupMobileNav() {
     const navToggle = document.querySelector('[data-nav-toggle]');

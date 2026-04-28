@@ -129,68 +129,10 @@
         </div>
       </div>
       <div class="layer-card-viz" aria-hidden="true">
-        <svg class="viz-institutional" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" fill="none">
-          <defs>
-            <linearGradient id="instLeafA" x1="0%" y1="100%" x2="50%" y2="0%">
-              <stop offset="0%" stop-color="#0a7d79" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#1de9c5" stop-opacity="0.95"/>
-            </linearGradient>
-            <linearGradient id="instLeafB" x1="0%" y1="100%" x2="50%" y2="0%">
-              <stop offset="0%" stop-color="#1a3a8c" stop-opacity="0.8"/>
-              <stop offset="100%" stop-color="#5ba9ff" stop-opacity="0.95"/>
-            </linearGradient>
-            <linearGradient id="instStem" x1="0%" y1="100%" x2="0%" y2="0%">
-              <stop offset="0%" stop-color="#0a7d79"/>
-              <stop offset="100%" stop-color="#1de9c5"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Ground line (top of soil = cultural foundation surface) -->
-          <line class="inst-ground-line" x1="30" y1="210" x2="250" y2="210" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
-          <line class="inst-ground-line-2" x1="30" y1="213.5" x2="250" y2="213.5" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
-
-          <!-- Soil texture (small diagonal hash marks below ground) -->
-          <g class="inst-soil" stroke="rgba(255,255,255,0.32)" stroke-width="0.7" stroke-linecap="round">
-            <line x1="40" y1="222" x2="46" y2="232"/>
-            <line x1="64" y1="220" x2="70" y2="230"/>
-            <line x1="88" y1="223" x2="94" y2="233"/>
-            <line x1="112" y1="221" x2="118" y2="231"/>
-            <line x1="160" y1="222" x2="166" y2="232"/>
-            <line x1="184" y1="220" x2="190" y2="230"/>
-            <line x1="208" y1="223" x2="214" y2="233"/>
-            <line x1="232" y1="221" x2="238" y2="231"/>
-            <line x1="52" y1="240" x2="58" y2="250"/>
-            <line x1="76" y1="242" x2="82" y2="252"/>
-            <line x1="100" y1="240" x2="106" y2="250"/>
-            <line x1="172" y1="240" x2="178" y2="250"/>
-            <line x1="196" y1="242" x2="202" y2="252"/>
-            <line x1="220" y1="240" x2="226" y2="250"/>
-          </g>
-
-          <!-- Roots (going downward from base of stem) -->
-          <g class="inst-roots" stroke="rgba(255,255,255,0.5)" stroke-width="0.9" stroke-linecap="round" fill="none">
-            <path class="inst-root inst-root-1" d="M 140 210 Q 130 222 116 238"/>
-            <path class="inst-root inst-root-2" d="M 140 210 Q 150 222 164 238"/>
-            <path class="inst-root inst-root-3" d="M 140 210 Q 138 226 134 248"/>
-            <path class="inst-root inst-root-4" d="M 140 210 Q 124 218 108 226"/>
-            <path class="inst-root inst-root-5" d="M 140 210 Q 156 218 172 226"/>
-          </g>
-
-          <!-- Main stem (rising from soil) -->
-          <path class="inst-stem" d="M 140 210 Q 137 170 140 100" stroke="url(#instStem)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-
-          <!-- LEFT leaf (lower) — Sustainability -->
-          <path class="inst-leaf inst-leaf-1" d="M 140 175 Q 100 168 78 148 Q 92 178 140 180 Z" fill="url(#instLeafA)" stroke="rgba(255,255,255,0.7)" stroke-width="1" stroke-linejoin="round"/>
-          <path class="inst-vein inst-vein-1" d="M 140 178 Q 110 168 86 152" stroke="rgba(255,255,255,0.5)" stroke-width="0.6" fill="none"/>
-
-          <!-- RIGHT leaf (mid) — Resilience -->
-          <path class="inst-leaf inst-leaf-2" d="M 140 145 Q 180 138 202 118 Q 188 148 140 150 Z" fill="url(#instLeafB)" stroke="rgba(255,255,255,0.7)" stroke-width="1" stroke-linejoin="round"/>
-          <path class="inst-vein inst-vein-2" d="M 140 148 Q 170 138 194 122" stroke="rgba(255,255,255,0.5)" stroke-width="0.6" fill="none"/>
-
-          <!-- TOP leaf (apex) — Regeneration -->
-          <path class="inst-leaf inst-leaf-3" d="M 140 112 Q 122 88 140 56 Q 158 88 140 112 Z" fill="url(#instLeafA)" stroke="rgba(255,255,255,0.7)" stroke-width="1" stroke-linejoin="round"/>
-          <path class="inst-vein inst-vein-3" d="M 140 110 L 140 62" stroke="rgba(255,255,255,0.5)" stroke-width="0.6" fill="none"/>
-        </svg>
+        <div class="viz-institutional-wrap">
+          <video class="viz-institutional-video viz-institutional-video-a" src="emotional-infrastructure.mp4" autoplay muted playsinline preload="auto" disablepictureinpicture></video>
+          <video class="viz-institutional-video viz-institutional-video-b" src="emotional-infrastructure.mp4" muted playsinline preload="auto" disablepictureinpicture></video>
+        </div>
       </div>
     </div>
   </div>
