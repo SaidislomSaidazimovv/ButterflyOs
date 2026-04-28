@@ -233,9 +233,12 @@ nav::before {
     display: block;
   }
   .nav-links {
-    /* Slide-down full-screen-below-nav overlay.
-       FULLY OPAQUE white background — translucent let the hero h1
-       behind bleed through and made the menu look broken. */
+    /* Slide-down full-screen-below-nav overlay with glassmorphism.
+       Translucent white + heavy backdrop blur — the page behind
+       becomes an unreadable haze, but the glass effect is preserved.
+       (Putting backdrop-filter on .nav-links is safe: it would
+       create a containing block for FIXED descendants of .nav-links,
+       and there are none — only <li> children in normal flow.) */
     position: fixed;
     top: 56px;
     left: 0;
@@ -247,7 +250,10 @@ nav::before {
     align-items: center;
     gap: 0;
     padding: 24px;
-    background: var(--paper);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(36px) saturate(160%);
+    -webkit-backdrop-filter: blur(36px) saturate(160%);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
