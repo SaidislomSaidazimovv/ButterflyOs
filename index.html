@@ -129,24 +129,18 @@
         </div>
       </div>
       <div class="layer-card-viz" aria-hidden="true">
-        <svg class="viz-institutional" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+        <svg class="viz-institutional" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" fill="none">
           <defs>
-            <linearGradient id="instRail" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#1de9c5"/>
-              <stop offset="100%" stop-color="#5ba9ff"/>
+            <linearGradient id="instLine" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="rgba(29, 233, 197, 0)"/>
+              <stop offset="20%" stop-color="rgba(29, 233, 197, 0.85)"/>
+              <stop offset="80%" stop-color="rgba(91, 169, 255, 0.85)"/>
+              <stop offset="100%" stop-color="rgba(91, 169, 255, 0)"/>
             </linearGradient>
           </defs>
-          <rect class="rail-track rail-track-1" x="20" y="50" width="240" height="20" rx="4" fill="rgba(255,255,255,0.06)"/>
-          <rect class="rail-fill rail-fill-1" x="20" y="50" width="200" height="20" rx="4" fill="url(#instRail)"/>
-          <text class="rail-label rail-label-1" x="20" y="86" fill="rgba(255,255,255,0.55)" font-size="10" font-family="Inter, sans-serif" letter-spacing="2.4">ACCORD</text>
-          <rect class="rail-track rail-track-2" x="20" y="118" width="240" height="20" rx="4" fill="rgba(255,255,255,0.06)"/>
-          <rect class="rail-fill rail-fill-2" x="20" y="118" width="160" height="20" rx="4" fill="url(#instRail)"/>
-          <text class="rail-label rail-label-2" x="20" y="154" fill="rgba(255,255,255,0.55)" font-size="10" font-family="Inter, sans-serif" letter-spacing="2.4">INDEX</text>
-          <rect class="rail-track rail-track-3" x="20" y="186" width="240" height="20" rx="4" fill="rgba(255,255,255,0.06)"/>
-          <rect class="rail-fill rail-fill-3" x="20" y="186" width="120" height="20" rx="4" fill="url(#instRail)"/>
-          <text class="rail-label rail-label-3" x="20" y="222" fill="rgba(255,255,255,0.55)" font-size="10" font-family="Inter, sans-serif" letter-spacing="2.4">BONDS</text>
-          <line class="rail-routing" x1="20" y1="248" x2="200" y2="248" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="2 4"/>
-          <text class="rail-routing-label" x="206" y="251" fill="rgba(255,255,255,0.4)" font-size="9" font-family="Inter, sans-serif" letter-spacing="1.6">ROUTING</text>
+          <line class="inst-line inst-line-1" x1="40" y1="100" x2="240" y2="100" stroke="url(#instLine)" stroke-width="2" stroke-linecap="round"/>
+          <line class="inst-line inst-line-2" x1="40" y1="140" x2="240" y2="140" stroke="url(#instLine)" stroke-width="2" stroke-linecap="round"/>
+          <line class="inst-line inst-line-3" x1="40" y1="180" x2="240" y2="180" stroke="url(#instLine)" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
     </div>
@@ -389,6 +383,7 @@
 -->
 
 <!-- ═══════════════ START A CONVERSATION — standalone CTA bridge ═══════════════ -->
+<!-- TEMPORARILY HIDDEN — restore by removing the surrounding outer comment markers.
 <section class="cta-bridge">
   <div class="partner-cta reveal">
     <h3>Run a 90-day pilot with your network.</h3>
@@ -397,6 +392,7 @@
     <a href="#system" class="btn btn-ghost">See the full system</a>
   </div>
 </section>
+-->
 
 <!-- ═══════════════ EMOTIONAL INFRASTRUCTURE ═══════════════ -->
 <section id="infrastructure" class="infra-section">

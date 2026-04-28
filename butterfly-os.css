@@ -730,82 +730,61 @@ section.dark .head .lede {
   opacity: 1;
 }
 
-/* Institutional — initial states */
-.viz-institutional .rail-track,
-.viz-institutional .rail-label,
-.viz-institutional .rail-routing,
-.viz-institutional .rail-routing-label {
+/* Institutional — three abstract horizontal lines, no labels.
+   Cleaner editorial replacement for the rails diagram with
+   ACCORD/INDEX/BONDS/ROUTING text that felt out of place. */
+.viz-institutional .inst-line {
   opacity: 0;
-}
-.viz-institutional .rail-fill {
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left center;
+  transform-origin: center;
   transform-box: fill-box;
 }
 
-/* Institutional — entrance + continuous */
-.architecture-stack.in .viz-institutional .rail-track-1 { animation: instFade 0.5s 0.4s ease forwards; }
-.architecture-stack.in .viz-institutional .rail-track-2 { animation: instFade 0.5s 0.55s ease forwards; }
-.architecture-stack.in .viz-institutional .rail-track-3 { animation: instFade 0.5s 0.7s ease forwards; }
-.architecture-stack.in .viz-institutional .rail-fill-1 {
-  animation: instFill1 1s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.architecture-stack.in .viz-institutional .rail-fill-2 {
-  animation: instFill2 1s 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.architecture-stack.in .viz-institutional .rail-fill-3 {
-  animation: instFill3 1s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-.architecture-stack.in .viz-institutional .rail-label-1 { animation: instFade 0.5s 1.25s ease forwards; }
-.architecture-stack.in .viz-institutional .rail-label-2 { animation: instFade 0.5s 1.4s ease forwards; }
-.architecture-stack.in .viz-institutional .rail-label-3 { animation: instFade 0.5s 1.55s ease forwards; }
-.architecture-stack.in .viz-institutional .rail-routing {
+.architecture-stack.in .viz-institutional .inst-line-1 {
   animation:
-    instRoutingFade 0.6s 1.6s ease forwards,
-    railRoutingFlow 1.2s 2.3s linear infinite;
-  will-change: stroke-dashoffset;
+    instLineDraw 0.8s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instLinePulse 4s 1.4s ease-in-out infinite;
 }
-.architecture-stack.in .viz-institutional .rail-routing-label { animation: instFade 0.5s 1.85s ease forwards; }
-
-@keyframes instFade {
-  to { opacity: 1; }
+.architecture-stack.in .viz-institutional .inst-line-2 {
+  animation:
+    instLineDraw 0.8s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instLinePulse 4s 2.1s ease-in-out infinite;
 }
-@keyframes instRoutingFade {
-  to { opacity: 1; }
-}
-@keyframes instFill1 {
-  to { opacity: 0.9; transform: scaleX(1); }
-}
-@keyframes instFill2 {
-  to { opacity: 0.72; transform: scaleX(1); }
-}
-@keyframes instFill3 {
-  to { opacity: 0.55; transform: scaleX(1); }
-}
-@keyframes railRoutingFlow {
-  to { stroke-dashoffset: -18; }
+.architecture-stack.in .viz-institutional .inst-line-3 {
+  animation:
+    instLineDraw 0.8s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instLinePulse 4s 2.8s ease-in-out infinite;
 }
 
-/* Respect reduced-motion preference */
+@keyframes instLineDraw {
+  from {
+    opacity: 0;
+    transform: scaleX(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+@keyframes instLinePulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .viz-cultural .cult-lines line,
   .viz-cultural .cult-ring,
   .viz-cultural .cult-nodes circle,
   .viz-cultural .cult-center,
-  .viz-institutional .rail-track,
-  .viz-institutional .rail-fill,
-  .viz-institutional .rail-label,
-  .viz-institutional .rail-routing,
-  .viz-institutional .rail-routing-label {
+  .viz-institutional .inst-line {
     opacity: 1;
     transform: none;
-    stroke-dashoffset: 0;
     animation: none !important;
   }
-  .viz-institutional .rail-fill-1 { opacity: 0.9; }
-  .viz-institutional .rail-fill-2 { opacity: 0.72; }
-  .viz-institutional .rail-fill-3 { opacity: 0.55; }
 }
 .architecture-stack .layer-card.cultural::after {
   content: "";
