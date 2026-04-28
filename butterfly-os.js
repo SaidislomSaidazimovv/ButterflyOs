@@ -339,12 +339,18 @@
   // ─── GLOBAL FLAGS — mobile canvas renderer ─────────────────
   // Single source <img> drawn as three vertical slices to one <canvas>.
   // No DOM clones; pixels are drawn from the same loaded image.
+  // Slice boundaries are placed in the empty pixel gaps between butterfly
+  // columns (analyzed from the actual bitmap). Source width 1280 → split
+  // at x=451 and x=888 so cuts land between butterflies, not through them.
   (function flagsCanvas() {
     const img = document.querySelector('.global-flags-image');
     const canvas = document.querySelector('.global-flags-canvas');
     if (!img || !canvas) return;
-    const SLICES = 3;
     const MQ = window.matchMedia('(max-width: 540px)');
+    // Boundaries as fractions of source width so they survive any future
+    // resampling of the asset at the same proportions.
+    const REF_W = 1280;
+    const CUTS = [0, 451 / REF_W, 888 / REF_W, 1];
 
     function render() {
       if (!MQ.matches) return;
@@ -354,27 +360,27 @@
       const dpr = window.devicePixelRatio || 1;
       const srcW = img.naturalWidth;
       const srcH = img.naturalHeight;
-      const sliceW = srcW / SLICES;          // source slice width
-      const sliceH = srcH;                    // full image height per slice
-      // Each slice is drawn at full canvas width; its rendered height
-      // preserves aspect ratio of the slice (sliceW × sliceH).
-      const dstH = cssW * (sliceH / sliceW);
-      const totalCssH = dstH * SLICES;
-      // Set CSS height so the canvas reserves vertical space.
+      // Compute each slice's source rect and rendered height (each slice
+      // is scaled to full canvas width; aspect ratio is preserved per slice
+      // so slices may have slightly different rendered heights).
+      const slices = [];
+      let totalCssH = 0;
+      for (let i = 0; i < CUTS.length - 1; i++) {
+        const sx = CUTS[i] * srcW;
+        const sw = (CUTS[i + 1] - CUTS[i]) * srcW;
+        const dh = cssW * (srcH / sw);
+        slices.push({ sx, sw, dy: totalCssH, dh });
+        totalCssH += dh;
+      }
       canvas.style.height = totalCssH + 'px';
-      // Backing store sized to device pixels for crisp rendering.
       canvas.width = Math.round(cssW * dpr);
       canvas.height = Math.round(totalCssH * dpr);
       const ctx = canvas.getContext('2d');
       ctx.imageSmoothingQuality = 'high';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, cssW, totalCssH);
-      for (let i = 0; i < SLICES; i++) {
-        ctx.drawImage(
-          img,
-          i * sliceW, 0, sliceW, sliceH,   // source rect
-          0, i * dstH, cssW, dstH          // destination rect
-        );
+      for (const s of slices) {
+        ctx.drawImage(img, s.sx, 0, s.sw, srcH, 0, s.dy, cssW, s.dh);
       }
     }
 
