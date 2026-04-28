@@ -131,13 +131,9 @@
       <div class="layer-card-viz" aria-hidden="true">
         <svg class="viz-institutional" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" fill="none">
           <defs>
-            <linearGradient id="instWingL" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#1de9c5" stop-opacity="0.95"/>
-              <stop offset="100%" stop-color="#0a7d79" stop-opacity="0.55"/>
-            </linearGradient>
-            <linearGradient id="instWingR" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#5ba9ff" stop-opacity="0.95"/>
-              <stop offset="100%" stop-color="#1a3a8c" stop-opacity="0.55"/>
+            <linearGradient id="instArch" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#1de9c5" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#5ba9ff" stop-opacity="0.65"/>
             </linearGradient>
           </defs>
           <g class="inst-marks" stroke="rgba(255,255,255,0.28)" stroke-width="1" stroke-linecap="square">
@@ -150,71 +146,61 @@
             <line x1="260" y1="240" x2="260" y2="260"/>
             <line x1="240" y1="260" x2="260" y2="260"/>
           </g>
-          <g class="inst-blueprint" stroke-linejoin="round" stroke-linecap="round" fill="none">
-            <!-- Antennae (clubbed tips) -->
-            <path class="inst-antenna inst-antenna-l" d="M 138 92 Q 130 78 118 68" stroke="rgba(255,255,255,0.75)" stroke-width="1.2"/>
-            <path class="inst-antenna inst-antenna-r" d="M 142 92 Q 150 78 162 68" stroke="rgba(255,255,255,0.75)" stroke-width="1.2"/>
-            <circle class="inst-antenna-tip inst-antenna-tip-l" cx="118" cy="68" r="2" fill="rgba(255,255,255,0.85)"/>
-            <circle class="inst-antenna-tip inst-antenna-tip-r" cx="162" cy="68" r="2" fill="rgba(255,255,255,0.85)"/>
+          <g class="inst-architecture" stroke-linejoin="round" stroke-linecap="square" fill="none">
+            <!-- Top entablature (horizontal beam) -->
+            <line class="inst-beam inst-beam-top" x1="40" y1="62" x2="240" y2="62" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"/>
+            <line class="inst-beam inst-beam-top-2" x1="40" y1="68" x2="240" y2="68" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
 
-            <!-- LEFT FOREWING outline -->
-            <path class="inst-wing inst-wing-fl" d="M 140 104 C 110 76, 76 60, 50 76 C 32 96, 36 122, 60 134 C 92 142, 128 132, 140 122 Z" stroke="url(#instWingL)" stroke-width="1.6"/>
-            <!-- LEFT FOREWING veins -->
-            <g class="inst-veins inst-veins-fl" stroke="url(#instWingL)" stroke-width="0.9">
-              <path d="M 140 106 C 116 86, 90 74, 62 80"/>
-              <path d="M 140 110 C 114 98, 86 96, 62 108"/>
-              <path d="M 140 115 C 110 114, 84 120, 66 128"/>
-              <path d="M 140 120 C 108 122, 86 128, 76 134"/>
+            <!-- Three pillars representing the three coming principles:
+                 sustainability, resilience, regeneration -->
+            <rect class="inst-pillar inst-pillar-1" x="62" y="70" width="20" height="144" stroke="url(#instArch)" stroke-width="1.5"/>
+            <rect class="inst-pillar inst-pillar-2" x="130" y="70" width="20" height="144" stroke="url(#instArch)" stroke-width="1.5"/>
+            <rect class="inst-pillar inst-pillar-3" x="198" y="70" width="20" height="144" stroke="url(#instArch)" stroke-width="1.5"/>
+
+            <!-- Internal pillar floor / segment lines -->
+            <g class="inst-floors" stroke="rgba(255,255,255,0.35)" stroke-width="0.7">
+              <line x1="62" y1="106" x2="82" y2="106"/>
+              <line x1="62" y1="142" x2="82" y2="142"/>
+              <line x1="62" y1="178" x2="82" y2="178"/>
+              <line x1="130" y1="106" x2="150" y2="106"/>
+              <line x1="130" y1="142" x2="150" y2="142"/>
+              <line x1="130" y1="178" x2="150" y2="178"/>
+              <line x1="198" y1="106" x2="218" y2="106"/>
+              <line x1="198" y1="142" x2="218" y2="142"/>
+              <line x1="198" y1="178" x2="218" y2="178"/>
             </g>
 
-            <!-- RIGHT FOREWING outline -->
-            <path class="inst-wing inst-wing-fr" d="M 140 104 C 170 76, 204 60, 230 76 C 248 96, 244 122, 220 134 C 188 142, 152 132, 140 122 Z" stroke="url(#instWingR)" stroke-width="1.6"/>
-            <!-- RIGHT FOREWING veins -->
-            <g class="inst-veins inst-veins-fr" stroke="url(#instWingR)" stroke-width="0.9">
-              <path d="M 140 106 C 164 86, 190 74, 218 80"/>
-              <path d="M 140 110 C 166 98, 194 96, 218 108"/>
-              <path d="M 140 115 C 170 114, 196 120, 214 128"/>
-              <path d="M 140 120 C 172 122, 194 128, 204 134"/>
+            <!-- Bottom foundation beam -->
+            <line class="inst-beam inst-beam-bottom" x1="40" y1="214" x2="240" y2="214" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"/>
+            <line class="inst-beam inst-beam-bottom-2" x1="40" y1="220" x2="240" y2="220" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+
+            <!-- Ground hatching below foundation -->
+            <g class="inst-ground" stroke="rgba(255,255,255,0.32)" stroke-width="0.7" stroke-linecap="round">
+              <line x1="44" y1="228" x2="52" y2="240"/>
+              <line x1="64" y1="228" x2="72" y2="240"/>
+              <line x1="84" y1="228" x2="92" y2="240"/>
+              <line x1="104" y1="228" x2="112" y2="240"/>
+              <line x1="124" y1="228" x2="132" y2="240"/>
+              <line x1="144" y1="228" x2="152" y2="240"/>
+              <line x1="164" y1="228" x2="172" y2="240"/>
+              <line x1="184" y1="228" x2="192" y2="240"/>
+              <line x1="204" y1="228" x2="212" y2="240"/>
+              <line x1="224" y1="228" x2="232" y2="240"/>
             </g>
 
-            <!-- LEFT HINDWING outline -->
-            <path class="inst-wing inst-wing-hl" d="M 138 130 C 120 144, 92 158, 76 178 C 68 198, 88 210, 112 204 C 132 192, 140 168, 142 146 Z" stroke="url(#instWingL)" stroke-width="1.5"/>
-            <!-- LEFT HINDWING veins -->
-            <g class="inst-veins inst-veins-hl" stroke="url(#instWingL)" stroke-width="0.85">
-              <path d="M 140 134 C 122 148, 100 162, 92 178"/>
-              <path d="M 140 144 C 122 162, 108 178, 102 195"/>
-              <path d="M 140 152 C 126 170, 118 188, 116 200"/>
+            <!-- Pillar capitals (small rectangles at top of each pillar
+                 to give classical architectural feel) -->
+            <g class="inst-capitals" stroke="rgba(255,255,255,0.7)" stroke-width="1.2">
+              <line x1="56" y1="70" x2="88" y2="70"/>
+              <line x1="124" y1="70" x2="156" y2="70"/>
+              <line x1="192" y1="70" x2="224" y2="70"/>
             </g>
 
-            <!-- RIGHT HINDWING outline -->
-            <path class="inst-wing inst-wing-hr" d="M 142 130 C 160 144, 188 158, 204 178 C 212 198, 192 210, 168 204 C 148 192, 140 168, 138 146 Z" stroke="url(#instWingR)" stroke-width="1.5"/>
-            <!-- RIGHT HINDWING veins -->
-            <g class="inst-veins inst-veins-hr" stroke="url(#instWingR)" stroke-width="0.85">
-              <path d="M 140 134 C 158 148, 180 162, 188 178"/>
-              <path d="M 140 144 C 158 162, 172 178, 178 195"/>
-              <path d="M 140 152 C 154 170, 162 188, 164 200"/>
-            </g>
-
-            <!-- Wing accent dots (eyespots) -->
-            <g class="inst-spots" fill="rgba(255,255,255,0.65)">
-              <circle cx="78" cy="100" r="1.6"/>
-              <circle cx="202" cy="100" r="1.6"/>
-              <circle cx="100" cy="180" r="1.4"/>
-              <circle cx="180" cy="180" r="1.4"/>
-            </g>
-
-            <!-- BODY: head, thorax, segmented abdomen -->
-            <g class="inst-body-group">
-              <circle class="inst-head" cx="140" cy="93" r="4.2" stroke="rgba(255,255,255,0.85)" stroke-width="1.2" fill="rgba(255,255,255,0.55)"/>
-              <ellipse class="inst-thorax" cx="140" cy="110" rx="4.6" ry="9" stroke="rgba(255,255,255,0.85)" stroke-width="1.2" fill="rgba(255,255,255,0.55)"/>
-              <path class="inst-abdomen" d="M 140 121 Q 136 148 138 178 Q 140 184 142 178 Q 144 148 140 121 Z" stroke="rgba(255,255,255,0.85)" stroke-width="1.2" fill="rgba(255,255,255,0.5)"/>
-              <g class="inst-segments" stroke="rgba(255,255,255,0.45)" stroke-width="0.6">
-                <line x1="137.5" y1="132" x2="142.5" y2="132"/>
-                <line x1="137" y1="142" x2="143" y2="142"/>
-                <line x1="137" y1="152" x2="143" y2="152"/>
-                <line x1="137.5" y1="162" x2="142.5" y2="162"/>
-                <line x1="138" y1="172" x2="142" y2="172"/>
-              </g>
+            <!-- Pillar bases -->
+            <g class="inst-bases" stroke="rgba(255,255,255,0.7)" stroke-width="1.2">
+              <line x1="56" y1="214" x2="88" y2="214"/>
+              <line x1="124" y1="214" x2="156" y2="214"/>
+              <line x1="192" y1="214" x2="224" y2="214"/>
             </g>
           </g>
         </svg>

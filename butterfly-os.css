@@ -730,44 +730,30 @@ section.dark .head .lede {
   opacity: 1;
 }
 
-/* Institutional — naturalist's butterfly sketch (4 wings + veins +
-   segmented body + clubbed antennae + accent eyespots).
-   Animates like an architect's plotter inking a field-guide
-   illustration: frame ticks first, then antennae, then the four
-   wing outlines draw in, then the wing veins fade in, then the
-   body and accent details settle. */
+/* Institutional — architectural cross-section: foundation, three
+   pillars, entablature, ground hatching. Reads as a blueprint of
+   the infrastructure being built. The three pillars map to the
+   three coming principles in the copy: sustainability, resilience,
+   regeneration. */
 
 /* Initial states */
 .viz-institutional .inst-marks line {
   stroke-dasharray: 22;
   stroke-dashoffset: 22;
 }
-.viz-institutional .inst-antenna {
-  stroke-dasharray: 60;
-  stroke-dashoffset: 60;
+.viz-institutional .inst-beam {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
 }
-.viz-institutional .inst-antenna-tip,
-.viz-institutional .inst-spots circle {
-  opacity: 0;
-  transform: scale(0);
-  transform-origin: center;
+.viz-institutional .inst-pillar {
+  transform: scaleY(0);
+  transform-origin: center bottom;
   transform-box: fill-box;
 }
-.viz-institutional .inst-wing {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-}
-.viz-institutional .inst-veins path {
-  opacity: 0;
-}
-.viz-institutional .inst-body-group > circle,
-.viz-institutional .inst-body-group > ellipse,
-.viz-institutional .inst-body-group > path {
-  opacity: 0;
-  transform: scale(0.4);
-  transform-origin: 140px 140px;
-}
-.viz-institutional .inst-segments line {
+.viz-institutional .inst-floors line,
+.viz-institutional .inst-capitals line,
+.viz-institutional .inst-bases line,
+.viz-institutional .inst-ground line {
   opacity: 0;
 }
 
@@ -775,163 +761,112 @@ section.dark .head .lede {
 .architecture-stack.in .viz-institutional .inst-marks line {
   animation: instMarkDraw 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.architecture-stack.in .viz-institutional .inst-antenna-l {
-  animation: instAntennaDraw 0.6s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.architecture-stack.in .viz-institutional .inst-beam-bottom {
+  animation: instBeamDraw 1s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.architecture-stack.in .viz-institutional .inst-antenna-r {
-  animation: instAntennaDraw 0.6s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.architecture-stack.in .viz-institutional .inst-beam-bottom-2 {
+  animation: instBeamDraw 1s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.architecture-stack.in .viz-institutional .inst-antenna-tip-l {
-  animation: instTipPop 0.4s 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-.architecture-stack.in .viz-institutional .inst-antenna-tip-r {
-  animation: instTipPop 0.4s 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-/* Forewings draw first (drawn outward from body) */
-.architecture-stack.in .viz-institutional .inst-wing-fl {
+/* Pillars rise from the foundation, staggered */
+.architecture-stack.in .viz-institutional .inst-pillar-1 {
   animation:
-    instWingDraw 2.2s 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instStrokePulse 5s 3.8s ease-in-out infinite;
+    instPillarRise 1s 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instPillarPulse 5s 3.8s ease-in-out infinite;
 }
-.architecture-stack.in .viz-institutional .inst-wing-fr {
+.architecture-stack.in .viz-institutional .inst-pillar-2 {
   animation:
-    instWingDraw 2.2s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instStrokePulse 5s 4.2s ease-in-out infinite;
+    instPillarRise 1s 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instPillarPulse 5s 4.2s ease-in-out infinite;
 }
-/* Hindwings start drawing slightly after the forewings */
-.architecture-stack.in .viz-institutional .inst-wing-hl {
+.architecture-stack.in .viz-institutional .inst-pillar-3 {
   animation:
-    instWingDraw 2s 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instStrokePulse 5s 4.6s ease-in-out infinite;
+    instPillarRise 1s 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    instPillarPulse 5s 4.6s ease-in-out infinite;
 }
-.architecture-stack.in .viz-institutional .inst-wing-hr {
-  animation:
-    instWingDraw 2s 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    instStrokePulse 5s 5s ease-in-out infinite;
+/* Capitals + bases fade in once the pillars have settled */
+.architecture-stack.in .viz-institutional .inst-capitals line {
+  animation: instDetailFade 0.5s 2s ease forwards;
 }
-
-/* Wing veins fade in after their parent wing has nearly finished drawing */
-.architecture-stack.in .viz-institutional .inst-veins-fl path {
-  animation: instVeinFade 0.8s 2.2s ease forwards;
+.architecture-stack.in .viz-institutional .inst-capitals line:nth-child(2) {
+  animation-delay: 2.1s;
 }
-.architecture-stack.in .viz-institutional .inst-veins-fr path {
-  animation: instVeinFade 0.8s 2.4s ease forwards;
+.architecture-stack.in .viz-institutional .inst-capitals line:nth-child(3) {
+  animation-delay: 2.2s;
 }
-.architecture-stack.in .viz-institutional .inst-veins-hl path {
-  animation: instVeinFade 0.8s 2.8s ease forwards;
+.architecture-stack.in .viz-institutional .inst-bases line {
+  animation: instDetailFade 0.5s 2s ease forwards;
 }
-.architecture-stack.in .viz-institutional .inst-veins-hr path {
-  animation: instVeinFade 0.8s 3s ease forwards;
+.architecture-stack.in .viz-institutional .inst-bases line:nth-child(2) {
+  animation-delay: 2.1s;
 }
-
-/* Body components pop in late so the wings settle around them */
-.architecture-stack.in .viz-institutional .inst-head {
-  animation:
-    instBodyPop 0.7s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-    instBodyGlow 4s 3.5s ease-in-out infinite;
+.architecture-stack.in .viz-institutional .inst-bases line:nth-child(3) {
+  animation-delay: 2.2s;
 }
-.architecture-stack.in .viz-institutional .inst-thorax {
-  animation: instBodyPop 0.7s 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+/* Top entablature draws once pillars are fully up */
+.architecture-stack.in .viz-institutional .inst-beam-top {
+  animation: instBeamDraw 1s 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.architecture-stack.in .viz-institutional .inst-abdomen {
-  animation: instBodyPop 0.7s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.architecture-stack.in .viz-institutional .inst-beam-top-2 {
+  animation: instBeamDraw 1s 2.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.architecture-stack.in .viz-institutional .inst-segments line {
-  animation: instSegmentFade 0.5s 1.5s ease forwards;
+/* Internal floor lines fade in last, as a final detailing pass */
+.architecture-stack.in .viz-institutional .inst-floors line {
+  animation: instDetailFade 0.5s 3s ease forwards;
 }
-.architecture-stack.in .viz-institutional .inst-segments line:nth-child(2) {
-  animation-delay: 1.6s;
+.architecture-stack.in .viz-institutional .inst-floors line:nth-child(2) {
+  animation-delay: 3.05s;
 }
-.architecture-stack.in .viz-institutional .inst-segments line:nth-child(3) {
-  animation-delay: 1.7s;
+.architecture-stack.in .viz-institutional .inst-floors line:nth-child(3) {
+  animation-delay: 3.1s;
 }
-.architecture-stack.in .viz-institutional .inst-segments line:nth-child(4) {
-  animation-delay: 1.8s;
+.architecture-stack.in .viz-institutional .inst-floors line:nth-child(4) {
+  animation-delay: 3.15s;
 }
-.architecture-stack.in .viz-institutional .inst-segments line:nth-child(5) {
-  animation-delay: 1.9s;
+.architecture-stack.in .viz-institutional .inst-floors line:nth-child(5) {
+  animation-delay: 3.2s;
 }
-
-/* Wing accent dots (eyespots) appear last, like a sketch artist
-   adding final details */
-.architecture-stack.in .viz-institutional .inst-spots circle {
-  animation: instSpotPop 0.5s var(--spot-delay, 3.4s)
-    cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.architecture-stack.in .viz-institutional .inst-floors line:nth-child(6) {
+  animation-delay: 3.25s;
 }
-.architecture-stack.in .viz-institutional .inst-spots circle:nth-child(1) {
-  --spot-delay: 3.4s;
+.architecture-stack.in .viz-institutional .inst-floors line:nth-child(7) {
+  animation-delay: 3.3s;
 }
-.architecture-stack.in .viz-institutional .inst-spots circle:nth-child(2) {
-  --spot-delay: 3.5s;
+.architecture-stack.in .viz-institutional .inst-floors line:nth-child(8) {
+  animation-delay: 3.35s;
 }
-.architecture-stack.in .viz-institutional .inst-spots circle:nth-child(3) {
-  --spot-delay: 3.7s;
+.architecture-stack.in .viz-institutional .inst-floors line:nth-child(9) {
+  animation-delay: 3.4s;
 }
-.architecture-stack.in .viz-institutional .inst-spots circle:nth-child(4) {
-  --spot-delay: 3.8s;
+/* Ground hatching ticks fade in with a left-to-right sweep */
+.architecture-stack.in .viz-institutional .inst-ground line {
+  animation: instDetailFade 0.4s var(--ground-delay, 1.3s) ease forwards;
 }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(1) { --ground-delay: 1.3s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(2) { --ground-delay: 1.35s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(3) { --ground-delay: 1.4s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(4) { --ground-delay: 1.45s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(5) { --ground-delay: 1.5s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(6) { --ground-delay: 1.55s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(7) { --ground-delay: 1.6s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(8) { --ground-delay: 1.65s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(9) { --ground-delay: 1.7s; }
+.architecture-stack.in .viz-institutional .inst-ground line:nth-child(10) { --ground-delay: 1.75s; }
 
 @keyframes instMarkDraw {
-  to {
-    stroke-dashoffset: 0;
-  }
+  to { stroke-dashoffset: 0; }
 }
-@keyframes instAntennaDraw {
-  to {
-    stroke-dashoffset: 0;
-  }
+@keyframes instBeamDraw {
+  to { stroke-dashoffset: 0; }
 }
-@keyframes instTipPop {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+@keyframes instPillarRise {
+  to { transform: scaleY(1); }
 }
-@keyframes instWingDraw {
-  to {
-    stroke-dashoffset: 0;
-  }
+@keyframes instDetailFade {
+  to { opacity: 1; }
 }
-@keyframes instVeinFade {
-  to {
-    opacity: 0.85;
-  }
-}
-@keyframes instBodyPop {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-@keyframes instSegmentFade {
-  to {
-    opacity: 1;
-  }
-}
-@keyframes instSpotPop {
-  to {
-    opacity: 0.65;
-    transform: scale(1);
-  }
-}
-@keyframes instStrokePulse {
-  0%,
-  100% {
-    stroke-opacity: 1;
-  }
-  50% {
-    stroke-opacity: 0.55;
-  }
-}
-@keyframes instBodyGlow {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
-  }
-  50% {
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
-  }
+@keyframes instPillarPulse {
+  0%, 100% { stroke-opacity: 1; }
+  50% { stroke-opacity: 0.55; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -940,25 +875,16 @@ section.dark .head .lede {
   .viz-cultural .cult-nodes circle,
   .viz-cultural .cult-center,
   .viz-institutional .inst-marks line,
-  .viz-institutional .inst-antenna,
-  .viz-institutional .inst-antenna-tip,
-  .viz-institutional .inst-wing,
-  .viz-institutional .inst-veins path,
-  .viz-institutional .inst-body-group > circle,
-  .viz-institutional .inst-body-group > ellipse,
-  .viz-institutional .inst-body-group > path,
-  .viz-institutional .inst-segments line,
-  .viz-institutional .inst-spots circle {
+  .viz-institutional .inst-beam,
+  .viz-institutional .inst-pillar,
+  .viz-institutional .inst-floors line,
+  .viz-institutional .inst-capitals line,
+  .viz-institutional .inst-bases line,
+  .viz-institutional .inst-ground line {
     opacity: 1;
     transform: none;
     stroke-dashoffset: 0;
     animation: none !important;
-  }
-  .viz-institutional .inst-veins path {
-    opacity: 0.85;
-  }
-  .viz-institutional .inst-spots circle {
-    opacity: 0.65;
   }
 }
 .architecture-stack .layer-card.cultural::after {
