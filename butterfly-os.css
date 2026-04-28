@@ -1541,6 +1541,15 @@ section.dark .head .lede {
   }
 }
 
+/* Wrapper section when partner-cta is standalone (Networks section hidden) */
+.cta-bridge {
+  padding: 130px 24px;
+  background: var(--paper);
+}
+.cta-bridge .partner-cta {
+  margin-top: 0;
+}
+
 /* ─── EMOTIONAL INFRASTRUCTURE — DEFEND/ENDURE/REINVENT ──── */
 .infra-section {
   padding: 160px 24px;
