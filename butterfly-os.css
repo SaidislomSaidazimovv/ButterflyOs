@@ -111,14 +111,26 @@ nav {
   right: 0;
   height: 56px;
   z-index: 1000;
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  background: rgba(255, 255, 255, 0.78);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 22px;
+}
+/* Background + glass blur lives on a pseudo, NOT on the nav itself.
+   backdrop-filter establishes a containing block for fixed-positioned
+   descendants — putting it on nav was clipping the mobile menu
+   (.nav-links is fixed) to the nav's 56px height. The pseudo has
+   no children, so it doesn't constrain anything. */
+nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: -1;
+  pointer-events: none;
 }
 .nav-inner {
   width: 100%;
