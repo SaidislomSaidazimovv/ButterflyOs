@@ -131,77 +131,16 @@
       <div class="layer-card-viz" aria-hidden="true">
         <svg class="viz-institutional" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" fill="none">
           <defs>
-            <linearGradient id="instArch" x1="0%" y1="0%" x2="0%" y2="100%">
+            <linearGradient id="instHeart" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#1de9c5" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#5ba9ff" stop-opacity="0.65"/>
+              <stop offset="100%" stop-color="#5ba9ff" stop-opacity="0.75"/>
             </linearGradient>
           </defs>
-          <g class="inst-marks" stroke="rgba(255,255,255,0.28)" stroke-width="1" stroke-linecap="square">
-            <line x1="20" y1="20" x2="40" y2="20"/>
-            <line x1="20" y1="20" x2="20" y2="40"/>
-            <line x1="240" y1="20" x2="260" y2="20"/>
-            <line x1="260" y1="20" x2="260" y2="40"/>
-            <line x1="20" y1="240" x2="20" y2="260"/>
-            <line x1="20" y1="260" x2="40" y2="260"/>
-            <line x1="260" y1="240" x2="260" y2="260"/>
-            <line x1="240" y1="260" x2="260" y2="260"/>
-          </g>
-          <g class="inst-architecture" stroke-linejoin="round" stroke-linecap="square" fill="none">
-            <!-- Top entablature (horizontal beam) -->
-            <line class="inst-beam inst-beam-top" x1="40" y1="62" x2="240" y2="62" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"/>
-            <line class="inst-beam inst-beam-top-2" x1="40" y1="68" x2="240" y2="68" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
-
-            <!-- Three pillars representing the three coming principles:
-                 sustainability, resilience, regeneration -->
-            <rect class="inst-pillar inst-pillar-1" x="62" y="70" width="20" height="144" stroke="url(#instArch)" stroke-width="1.5"/>
-            <rect class="inst-pillar inst-pillar-2" x="130" y="70" width="20" height="144" stroke="url(#instArch)" stroke-width="1.5"/>
-            <rect class="inst-pillar inst-pillar-3" x="198" y="70" width="20" height="144" stroke="url(#instArch)" stroke-width="1.5"/>
-
-            <!-- Internal pillar floor / segment lines -->
-            <g class="inst-floors" stroke="rgba(255,255,255,0.35)" stroke-width="0.7">
-              <line x1="62" y1="106" x2="82" y2="106"/>
-              <line x1="62" y1="142" x2="82" y2="142"/>
-              <line x1="62" y1="178" x2="82" y2="178"/>
-              <line x1="130" y1="106" x2="150" y2="106"/>
-              <line x1="130" y1="142" x2="150" y2="142"/>
-              <line x1="130" y1="178" x2="150" y2="178"/>
-              <line x1="198" y1="106" x2="218" y2="106"/>
-              <line x1="198" y1="142" x2="218" y2="142"/>
-              <line x1="198" y1="178" x2="218" y2="178"/>
-            </g>
-
-            <!-- Bottom foundation beam -->
-            <line class="inst-beam inst-beam-bottom" x1="40" y1="214" x2="240" y2="214" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"/>
-            <line class="inst-beam inst-beam-bottom-2" x1="40" y1="220" x2="240" y2="220" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
-
-            <!-- Ground hatching below foundation -->
-            <g class="inst-ground" stroke="rgba(255,255,255,0.32)" stroke-width="0.7" stroke-linecap="round">
-              <line x1="44" y1="228" x2="52" y2="240"/>
-              <line x1="64" y1="228" x2="72" y2="240"/>
-              <line x1="84" y1="228" x2="92" y2="240"/>
-              <line x1="104" y1="228" x2="112" y2="240"/>
-              <line x1="124" y1="228" x2="132" y2="240"/>
-              <line x1="144" y1="228" x2="152" y2="240"/>
-              <line x1="164" y1="228" x2="172" y2="240"/>
-              <line x1="184" y1="228" x2="192" y2="240"/>
-              <line x1="204" y1="228" x2="212" y2="240"/>
-              <line x1="224" y1="228" x2="232" y2="240"/>
-            </g>
-
-            <!-- Pillar capitals (small rectangles at top of each pillar
-                 to give classical architectural feel) -->
-            <g class="inst-capitals" stroke="rgba(255,255,255,0.7)" stroke-width="1.2">
-              <line x1="56" y1="70" x2="88" y2="70"/>
-              <line x1="124" y1="70" x2="156" y2="70"/>
-              <line x1="192" y1="70" x2="224" y2="70"/>
-            </g>
-
-            <!-- Pillar bases -->
-            <g class="inst-bases" stroke="rgba(255,255,255,0.7)" stroke-width="1.2">
-              <line x1="56" y1="214" x2="88" y2="214"/>
-              <line x1="124" y1="214" x2="156" y2="214"/>
-              <line x1="192" y1="214" x2="224" y2="214"/>
-            </g>
+          <g class="inst-heart-group">
+            <!-- Soft outer glow halo behind the heart -->
+            <path class="inst-heart-glow" d="M 140 220 C 70 175, 35 130, 55 90 C 75 60, 120 60, 140 100 C 160 60, 205 60, 225 90 C 245 130, 210 175, 140 220 Z" fill="url(#instHeart)" opacity="0.35"/>
+            <!-- Main heart silhouette -->
+            <path class="inst-heart" d="M 140 220 C 70 175, 35 130, 55 90 C 75 60, 120 60, 140 100 C 160 60, 205 60, 225 90 C 245 130, 210 175, 140 220 Z" fill="url(#instHeart)" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
           </g>
         </svg>
       </div>
