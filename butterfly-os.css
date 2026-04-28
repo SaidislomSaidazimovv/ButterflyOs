@@ -173,9 +173,105 @@ nav {
   width: 100%;
   left: 0;
 }
+/* Hamburger toggle — only visible on mobile */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  z-index: 1100;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+.nav-toggle-bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--ink);
+  margin: 3px 0;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+  transform-origin: center;
+}
+
 @media (max-width: 740px) {
+  .nav-toggle {
+    display: flex;
+  }
   .nav-links {
+    /* Slide-down full-screen-below-nav overlay */
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    padding: 36px 24px 60px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease;
+    z-index: 1050;
+    overflow-y: auto;
+  }
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+  .nav-links a {
+    display: block;
+    padding: 18px 24px;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    opacity: 1;
+  }
+  .nav-links a::after {
+    /* the desktop animated underline doesn't suit the larger
+       mobile menu items — hide it */
     display: none;
+  }
+  .nav-links a:hover {
+    color: var(--teal-2);
+  }
+  /* Open state */
+  .nav-open .nav-links {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* Hamburger morphs to X when open */
+  .nav-open .nav-toggle-bar:nth-child(1) {
+    transform: translateY(4.5px) rotate(45deg);
+  }
+  .nav-open .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-open .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-4.5px) rotate(-45deg);
+  }
+  .nav-open .nav-toggle {
+    aria-label: "Close menu";
   }
 }
 

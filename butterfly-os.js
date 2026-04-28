@@ -232,3 +232,41 @@
       b.style.opacity = '0';
     }
   })();
+
+  // ─── Mobile nav toggle ───
+  (function setupMobileNav() {
+    const navToggle = document.querySelector('[data-nav-toggle]');
+    const navEl = document.querySelector('nav');
+    if (!navToggle || !navEl) return;
+
+    function setNavOpen(open) {
+      navEl.classList.toggle('nav-open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    navToggle.addEventListener('click', () => {
+      setNavOpen(!navEl.classList.contains('nav-open'));
+    });
+
+    // Close on link tap (so smooth-scroll runs on a closing menu)
+    navEl.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => setNavOpen(false));
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navEl.classList.contains('nav-open')) {
+        setNavOpen(false);
+      }
+    });
+
+    // If the user resizes from mobile to desktop while the menu is open,
+    // close it so the desktop layout doesn't render with body-scroll locked.
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 740 && navEl.classList.contains('nav-open')) {
+        setNavOpen(false);
+      }
+    });
+  })();
